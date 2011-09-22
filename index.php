@@ -4,8 +4,10 @@
 <br />
 <?php
 if(isset($_SESSION["logged_in"])){
-     print "You are already logged in. You can either log out or continue modifying your <a href='avatar.php'>Avatar</a></center>";
-
+    print "<p>You are already logged in. You can either log out or continue modifying your <a href='avatar.php'>Avatar</a></p>";
+    print "<form method='link' action='action/logoutscript.php'>
+    <input type='submit' value='Log out'>
+    </form></center>";
 }
 else {
 echo "
