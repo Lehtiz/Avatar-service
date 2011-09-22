@@ -12,7 +12,7 @@ $query = "INSERT INTO user(username, useremail, userpassword) VALUES('$username'
 
 $result = mysql_query($query);
 if ($result){
-    header("location: ../index.php");
+    header("location: ../avatar.php");
 }
 else{
     $error = mysql_error();
