@@ -12,7 +12,7 @@ if(empty($username) || empty($password)){
     header("location:../index.php");
 }
 else{
-    $query = "SELECT username, userpassword FROM user WHERE username = $username";
+    $query = "SELECT username, userpassword FROM user WHERE username = '$username'";
     $result = mysql_query($query);
     if(!$result){
         $error=mysql_error();
