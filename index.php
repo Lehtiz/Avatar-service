@@ -4,7 +4,7 @@
 <br />
 <?php
 if(isset($_SESSION["logged_in"])){
-     print "You are already logged in. You can either log out or continue modifying your <a href='avatar.php'>Avatar</a></center>";
+     print "You are already logged in. You can either <a href='action/logoutscript.php'>log out</a> or continue modifying your <a href='avatar.php'>Avatar</a></center>";
 
 }
 else {
