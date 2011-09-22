@@ -9,5 +9,13 @@
 <br />
 <input type="submit" value="Save changes" />
 </form>
-</center>
+<?php
+    if (isset($_SESSION["logged_in"])){
+    print "<form method='link' action='action/logoutscript.php'>
+    <input type='submit' value='Log out'>
+    </form></center>";
+    }
+    else
+    print "</center>";
+?>
 <?php include_once "bottom.php"; ?>
