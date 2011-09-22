@@ -17,7 +17,7 @@ if ($result){
 else{
     $error = mysql_error();
     print "$error <br/>";
-    print "<a href='createuser.php'>Back</a>";
+    print "<a href='../newuser.php'>Back</a>";
 }
 
 ?>
