@@ -8,7 +8,7 @@ $email = strip_tags($_POST["txtEmail"]);
 $password = strip_tags($_POST["txtPassword"]);
 
 
-$query = "INSERT INTO user(username, email, password) VALUES('$username', '$email', '$password')";
+$query = "INSERT INTO user(username, useremail, userpassword) VALUES('$username', '$email', '$password')";
 
 $result = mysql_query($query);
 if ($result){
