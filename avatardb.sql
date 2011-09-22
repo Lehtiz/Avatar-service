@@ -4,8 +4,8 @@ USE avatar;
 
 DROP TABLE IF EXISTS user;
 
-CREATE TABLE IF NOT EXISTS `user`(
-    `username` VARCHAR(30) NOT NULL,
-    `email` VARCHAR(50) NOT NULL,
-    `password` VARCHAR(30) NOT NULL
+CREATE TABLE IF NOT EXISTS user(
+    username VARCHAR(30) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    password VARCHAR(30) NOT NULL
 )ENGINE = InnoDB;
