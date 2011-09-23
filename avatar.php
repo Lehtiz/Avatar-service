@@ -1,5 +1,5 @@
 <?php include_once "top.php"; ?>
-<center>
+
 <h3>Edit Identity & Avatar</h3>
 <br />
 <form method="post" action="modifyavatar.php">
@@ -13,9 +13,7 @@
     if (isset($_SESSION["logged_in"])){
     print "<form method='link' action='action/logoutscript.php'>
     <input type='submit' value='Log out'>
-    </form></center>";
+    </form>";
     }
-    else
-    print "</center>";
 ?>
 <?php include_once "bottom.php"; ?>
