@@ -2,7 +2,7 @@
 <h3>Welcome to realxtend avatar service!</h3>
 <br />
 <?php
-if(isset($_SESSION["logged_in"])){
+if($_SESSION["logged_in"]==true){
     print "<p>You are already logged in.<br /> You can either <a href='action/logoutscript.php'>log out</a> or continue modifying your <a href='avatar.php'>Avatar</a></p>";
 }
 else {

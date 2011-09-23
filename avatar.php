@@ -1,6 +1,6 @@
 <?php include_once "top.php"; ?>
 <?php
-    if (isset($_SESSION["logged_in"])){
+    if ($_SESSION["logged_in"]==true){
 
     print "
     <center>

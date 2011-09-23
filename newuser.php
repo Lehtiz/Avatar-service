@@ -2,11 +2,9 @@
 <h3>Create a new user</h3>
 <br />
 <?php
-if(isset($_SESSION["logged_in"])){
-    print "<p>You are already logged in. You must log out before you can create a new account</p>";
-    print "<form method='link' action='action/logoutscript.php'>
-    <input type='submit' value='Log out'>
-    </form>";
+if($_SESSION["logged_in"]==true){
+    print "<p>You are already logged in.<br />
+    You must <a href='action/logoutscript.php'>log out</a> before you can create a new account</p>";
 }
 else {
 echo "
