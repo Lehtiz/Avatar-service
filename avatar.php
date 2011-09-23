@@ -1,6 +1,6 @@
 <?php include_once "top.php"; ?>
 <?php
-    if (isset($_SESSION["logged_in"])){
+    if ($_SESSION["logged_in"]==true){
 
     print "
     <center>
@@ -16,7 +16,7 @@
 
     <form method='link' action='action/logoutscript.php'>
     <input type='submit' value='Log out'>
-    </form></center>";
+    </form>";
     }
     else
     print "<p>You must <a href='index.php'>log in</a> to enter this page</p>";
