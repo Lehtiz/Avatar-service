@@ -15,12 +15,17 @@ import pexpect
 ###
 sudopwd = "NOTSET"
 passwordSet=False
-MYSQL_ROOT_PWD = "N73J"
+
 WEB_ROOT = "/var/www/"
 AVATAR_ROOT = WEB_ROOT + "avatar/"
+
+#rootpw set during install
+MYSQL_ROOT_PWD = "N73J"
+
 MYSQL_HOST = "localhost"
 MYSQL_USER = "root"
 MYSQL_USER_PWD = MYSQL_ROOT_PWD # TODO: create custom user ?
+
 DATABASE_FILE = "avatardb.sql" 
 ###
 
@@ -64,7 +69,7 @@ def setupAvatarService():
     #presume tundra build already (TODO: add tundra build here)
     
     #mod apaches default www home (TODO: custom www home)
-    subprocess.call("sudo chown -R " + getpass.getuser() + " /var/www", shell=True)
+    subprocess.call("sudo chown -R " + getpass.getuser() + WEB_ROOT, shell=True)
 
     #check folder dest and move to webroot/backup/ if exists 
     if os.path.exists(AVATAR_ROOT):
