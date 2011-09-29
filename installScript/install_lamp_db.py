@@ -31,12 +31,15 @@ DATABASE_FILE = "avatardb.sql"
 
 
 def main():
+    installPrograms()
+    setupAvatarService()
+"""
     if passwordSet:
         installPrograms()
         setupAvatarService()
     else:
         print("no password given")
-    
+"""
     
 def installPrograms():
     #apache2, php
