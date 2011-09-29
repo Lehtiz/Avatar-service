@@ -7,6 +7,7 @@
 import os
 import sys
 import subprocess
+import shutil
 import getpass
 from optparse import OptionParser
 import pexpect
@@ -14,14 +15,20 @@ import pexpect
 ###
 sudopwd = "NOTSET"
 passwordSet=False
-MYSQL_ROOT_PWD = "fasd"
+MYSQL_ROOT_PWD = "N73J"
+WEB_ROOT = "/var/www/"
+AVATAR_ROOT = WEB_ROOT + "avatar/"
+MYSQL_HOST = "localhost"
+MYSQL_USER = "root"
+MYSQL_USER_PWD = MYSQL_ROOT_PWD # TODO: create custom user ?
+DATABASE_FILE = "avatardb.sql" 
 ###
-
 
 
 def main():
     if passwordSet:
         installPrograms()
+        setupAvatarService()
     else:
         print("no password given")
     
@@ -58,30 +65,23 @@ def setupAvatarService():
     
     #mod apaches default www home (TODO: custom www home)
     subprocess.call("sudo chown -R " + getpass.getuser() + " /var/www", shell=True)
-    
-    #get Avatar-service sources
-    WEB_ROOT = "/var/www"
-    AVATAR_ROOT = WEB_ROOT + "avatar/"
-    #check and 
+
+    #check folder dest and move to webroot/backup/ if exists 
     if os.path.exists(AVATAR_ROOT):
-        shutil.move(AVATAR_ROOT, "backup/")
-    subprocess.call("git clone git://github.com/Lehtiz/Avatar-service.git " + WEB_ROOT +"/avatar", shell=True)
-    
+        shutil.move(AVATAR_ROOT, WEB_ROOT + "backup/")
+        
+    #get sources from github
+    subprocess.call("git clone git://github.com/Lehtiz/Avatar-service.git " + AVATAR_ROOT, shell=True)
+   
     #setup database
-    MYSQL_HOST = "localhost"
-    MYSQL_USER = "root"
-    MYSQL_USER_PWD = MYSQL_ROOT_PWD # TODO: create custom user ?
-    DATABASE_FILE = "avatardb.sql" 
-    
-    #change cwd to /var/www/avatar
     #import db from file
     subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_USER +" -p" + MYSQL_USER_PWD + " < " + AVATAR_ROOT + DATABASE_FILE, shell=True)
-    
 
 
 def cleanUp(file):
     if os.path.isfile(file):
         os.remove(file)
+
 
 if __name__ == "__main__":
     parser = OptionParser()
@@ -91,8 +91,3 @@ if __name__ == "__main__":
         sudopwd = options.sudopwd
         passwordSet=True
     main()
-
-
-
-
-
