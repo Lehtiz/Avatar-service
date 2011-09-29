@@ -59,8 +59,8 @@ def installPrograms():
         pre.write("mysql-server-5.1 mysql-server/" + "start_on_boot boolean true")
     
     #install mysql using variables from preseed
-    #pipe vars from file and set
     subprocess.call("sudo apt-get install debconf-utils",shell=True)
+    #pipe vars from file and set
     subprocess.call("cat " + preseedFile + " | sudo debconf-set-selections", shell=True)
     subprocess.call("sudo apt-get -y install mysql-server", shell=True)
     
