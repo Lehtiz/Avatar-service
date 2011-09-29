@@ -1,14 +1,21 @@
 #!/usr/local/bin/python
 
+## TODO: sudo passwd stuff
+## meanwhile: RUN AS SUDO "sudo python install_lamp_db.py"
+##
+
 import os
 import sys
 import subprocess
 from optparse import OptionParser
+import pexpect
 
 ###
 sudopwd = "NOTSET"
 passwordSet=False
 ###
+
+
 
 def main():
     if passwordSet:
@@ -19,7 +26,7 @@ def main():
     
 def installPrograms():
     #apache2, php
-    #subprocess.call("sudo apt-get -y install apache2 php5-mysql libapache2-mod-php5", shell=True)
+    subprocess.call("sudo apt-get -y install apache2 php5-mysql libapache2-mod-php5", shell=True)
     
     #MYSQL
     #create preseed file
@@ -37,8 +44,8 @@ def installPrograms():
     
     #install mysql using variables from preseed
     #pipe vars from file and set
-    #subprocess.call("cat preseed | sudo debconf-set-selections", shell=True)
-    #subprocess.call("sudo apt-get -y install mysql-server", shell=True)
+    subprocess.call("cat preseed | sudo debconf-set-selections", shell=True)
+    subprocess.call("sudo apt-get -y install mysql-server", shell=True)
     
     #cleanup ops
     cleanUp(preseedFile)
@@ -61,7 +68,7 @@ def setupAvatarService():
     
     #change cwd to /var/www/avatar
     #import db from file
-    subprocess.call("mysql -h"MYSQL_HOST " -u" + MYSQL_USER +" -p" + MYSQL_USER_PWD + " < " + DATABASE_FILE + ", shell=True)
+    subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_USER +" -p" + MYSQL_USER_PWD + " < " + DATABASE_FILE, shell=True)
     
 
 
@@ -82,55 +89,3 @@ if __name__ == "__main__":
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"""
-install tools (ubuntu)
-    apache, php
-    mysql
-        config
-import mysql db
-
-
-
-
-
----
-http://www.rndguy.ca/2010/02/24/fully-automated-ubuntu-server-setups-using-preseed/
-
-
-
-MYSQL_ROOT_PWD=asd
-MYSQL_HOST=localhost
-DATABASE_NAME=avatar
-DATABASE_FILE=cwd(avatardb.sql)
-
-::mysql auto install:
-preseed=mysql.preseed
-echo "mysql-server-5.1 mysql-server/root_password password MYSQL_ROOT_PWD" > preseed
-echo "mysql-server-5.1 mysql-server/root_password_again password MYSQL_ROOT_PWD" >> preseed
-echo "mysql-server-5.1 mysql-server/start_on_boot boolean true" >> preseed
-
-cat preseed | sudo debconf-set-selections
-sudo apt-get -y install mysql-server
-rm preseed
-::
-
-
-
-::importing db
-mysql -hMYSQL_HOST -uroot -pMYSQL_ROOT_PWD DATABASE_NAME < DATABASE_FILE #<----<< full path or in mysql bin dir
-
-"""
