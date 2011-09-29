@@ -7,12 +7,14 @@
 import os
 import sys
 import subprocess
+import getpass
 from optparse import OptionParser
 import pexpect
 
 ###
 sudopwd = "NOTSET"
 passwordSet=False
+MYSQL_ROOT_PWD = "fasd"
 ###
 
 
@@ -31,7 +33,6 @@ def installPrograms():
     #MYSQL
     #create preseed file
     preseedFile = "mysql.preseed"
-    MYSQL_ROOT_PWD = "fasd"
     
     #make sure file does not exist, remove if it does
     if os.path.isfile(preseedFile):
@@ -44,7 +45,8 @@ def installPrograms():
     
     #install mysql using variables from preseed
     #pipe vars from file and set
-    subprocess.call("cat preseed | sudo debconf-set-selections", shell=True)
+    subprocess.call("sudo apt-get install debconf-utils",shell=True)
+    subprocess.call("cat " + preseedFile + " | sudo debconf-set-selections", shell=True)
     subprocess.call("sudo apt-get -y install mysql-server", shell=True)
     
     #cleanup ops
@@ -58,7 +60,12 @@ def setupAvatarService():
     subprocess.call("sudo chown -R " + getpass.getuser() + " /var/www", shell=True)
     
     #get Avatar-service sources
-    subprocess.call("git clone git://github.com/Lehtiz/Avatar-service.git /var/www/avatar", shell=True)
+    WEB_ROOT = "/var/www"
+    AVATAR_ROOT = WEB_ROOT + "avatar/"
+    #check and 
+    if os.path.exists(AVATAR_ROOT):
+        shutil.move(AVATAR_ROOT, "backup/")
+    subprocess.call("git clone git://github.com/Lehtiz/Avatar-service.git " + WEB_ROOT +"/avatar", shell=True)
     
     #setup database
     MYSQL_HOST = "localhost"
@@ -68,7 +75,7 @@ def setupAvatarService():
     
     #change cwd to /var/www/avatar
     #import db from file
-    subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_USER +" -p" + MYSQL_USER_PWD + " < " + DATABASE_FILE, shell=True)
+    subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_USER +" -p" + MYSQL_USER_PWD + " < " + AVATAR_ROOT + DATABASE_FILE, shell=True)
     
 
 
