@@ -8,10 +8,10 @@
             websocket_host = 'localhost';
             websocket_port = '9999';
         </script>
-        <script type='text/javascript' src='global.js'></script>
-        <script type='text/javascript' src='3d.js'></script>
-        <script type='text/javascript' src='entities.js'></script>
-        <script type='text/javascript' src='socket.js'></script>
+        <script type='text/javascript' src='js/global.js'></script>
+        <script type='text/javascript' src='js/3d.js'></script>
+        <script type='text/javascript' src='js/entities.js'></script>
+        <script type='text/javascript' src='js/socket.js'></script>
             
         <div id='left'>
             <canvas id='avatar' width='250' height='500'>
