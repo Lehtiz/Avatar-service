@@ -1,7 +1,7 @@
 #!/usr/local/bin/python
 
 ## TODO: sudo passwd stuff
-## meanwhile: RUN AS SUDO "sudo python install_lamp_db.py"
+## meanwhile: RUN AS SUDO "sudo python setup.py"
 ##
 
 import os
@@ -28,7 +28,7 @@ MYSQL_ROOT = "root"
 MYSQL_ROOT_PW = "N73J"
 
 MYSQL_USER = "avatarservice"
-MYSQL_USER_PW = "avatarpw123" # TODO: create custom user ?
+MYSQL_USER_PW = "avatarpw123"
 
 DATABASE_FILE = "avatardb.sql" 
 ###
@@ -142,6 +142,7 @@ def updateMysqlConfig():
                     out.write(line.replace(identpw, MYSQL_USER_PW),)
                 else:
                     out.write(line)
+    #replace base file with the configured dbconnect
     os.remove(dbConfigFileIn)
     os.rename(dbConfigFileOut, dbConfigFileIn)
 
