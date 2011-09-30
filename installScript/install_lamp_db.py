@@ -71,6 +71,9 @@ def installPrograms():
     
     #cleanup tmp files
     cleanUp(preseedFile)
+        
+    #restart apache server
+    subprocess.call("sudo /etc/init.d/apache2 restart")
 
 
 def setupAvatarService():
