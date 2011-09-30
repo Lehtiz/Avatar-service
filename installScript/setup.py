@@ -102,7 +102,7 @@ def setupAvatarService():
     subprocess.call("git clone " + GIT_SOURCE + " " + AVATAR_ROOT, shell=True)
     
     #setup database, import from a file
-    subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_USER +" -p" + MYSQL_USER_PW + " < " + AVATAR_ROOT + DATABASE_FILE, shell=True)
+    subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_ROOT +" -p" + MYSQL_ROOT_PW + " < " + AVATAR_ROOT + DATABASE_FILE, shell=True)
 
 
 def cleanUp(file):
