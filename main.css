@@ -1,5 +1,4 @@
 #body{
-    border: 1px solid red;
     float: left;
     text-align: center;
     width: 600px;
@@ -9,12 +8,10 @@
 }
 
 #left{
-    border: 1px solid red;
     float: left;
     width: 300px;
 }
 #right{
-    border: 1px solid red;
     float: right;
     width: 290px;
 }
