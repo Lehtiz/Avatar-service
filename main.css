@@ -1,5 +1,20 @@
 #body{
+    border: 1px solid red;
+    float: left;
     text-align: center;
+    width: 600px;
+    height: 600px;
     margin-left: 20%;
     margin-right: 20%;
+}
+
+#left{
+    border: 1px solid red;
+    float: left;
+    width: 300px;
+}
+#right{
+    border: 1px solid red;
+    float: right;
+    width: 290px;
 }
