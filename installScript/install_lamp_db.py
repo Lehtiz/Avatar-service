@@ -73,7 +73,7 @@ def installPrograms():
     cleanUp(preseedFile)
         
     #restart apache server
-    subprocess.call("sudo /etc/init.d/apache2 restart")
+    subprocess.call("sudo /etc/init.d/apache2 restart", shell=True)
 
 
 def setupAvatarService():
@@ -96,6 +96,12 @@ def setupAvatarService():
 def cleanUp(file):
     if os.path.isfile(file):
         os.remove(file)
+
+
+def createMysqlUser()
+    subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_USER +" -p" + MYSQL_USER_PWD + " < " + 
+    "GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON database1.* TO '" + 
+    MYSQL_USER + "'@'" + MYSQL_HOST + "' IDENTIFIED BY '" + MYSQL_USER_PWD + "'";
 
 
 if __name__ == "__main__":
