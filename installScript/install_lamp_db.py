@@ -16,6 +16,8 @@ import pexpect
 sudopwd = "NOTSET"
 passwordSet=False
 
+#avatar service sources
+GIT_SOURCE = "git://github.com/Lehtiz/Avatar-service.git"
 WEB_ROOT = "/var/www/"
 AVATAR_ROOT = WEB_ROOT + "avatar/"
 
@@ -42,6 +44,10 @@ def main():
 """
     
 def installPrograms():
+
+    #preq for mysql installation parameters
+    subprocess.call("sudo apt-get install debconf-utils",shell=True)
+    
     #apache2, php
     subprocess.call("sudo apt-get -y install apache2 php5-mysql libapache2-mod-php5", shell=True)
     
@@ -59,17 +65,16 @@ def installPrograms():
         pre.write("mysql-server-5.1 mysql-server/" + "start_on_boot boolean true")
     
     #install mysql using variables from preseed
-    subprocess.call("sudo apt-get install debconf-utils",shell=True)
     #pipe vars from file and set
     subprocess.call("cat " + preseedFile + " | sudo debconf-set-selections", shell=True)
     subprocess.call("sudo apt-get -y install mysql-server", shell=True)
     
-    #cleanup ops
+    #cleanup tmp files
     cleanUp(preseedFile)
 
 
 def setupAvatarService():
-    #presume tundra build already (TODO: add tundra build here)
+    #presume tundra build already (TODO: add tundra build here?)
     
     #mod apaches default www home (TODO: custom www home)
     subprocess.call("sudo chown -R " + getpass.getuser() + WEB_ROOT, shell=True)
@@ -79,10 +84,9 @@ def setupAvatarService():
         shutil.move(AVATAR_ROOT, WEB_ROOT + "backup/")
         
     #get sources from github
-    subprocess.call("git clone git://github.com/Lehtiz/Avatar-service.git " + AVATAR_ROOT, shell=True)
-   
-    #setup database
-    #import db from file
+    subprocess.call("git clone " + GIT_SOURCE + " " + AVATAR_ROOT, shell=True)
+    
+    #setup database, import from a file
     subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_USER +" -p" + MYSQL_USER_PWD + " < " + AVATAR_ROOT + DATABASE_FILE, shell=True)
 
 
