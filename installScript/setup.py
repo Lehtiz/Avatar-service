@@ -11,9 +11,10 @@ import shutil
 import getpass
 from optparse import OptionParser
 import pexpect
+import fileinput
 
 ###
-sudopwd = "NOTSET"
+sudopw = "NOTSET"
 passwordSet=False
 
 #avatar service sources
@@ -24,19 +25,28 @@ AVATAR_ROOT = WEB_ROOT + "avatar/"
 #rootpw set during install
 MYSQL_HOST = "localhost"
 MYSQL_ROOT = "root"
-MYSQL_ROOT_PWD = "N73J"
+MYSQL_ROOT_PW = "N73J"
 
 MYSQL_USER = "avatarservice"
-MYSQL_USER_PWD = "avatarpw123" # TODO: create custom user ?
+MYSQL_USER_PW = "avatarpw123" # TODO: create custom user ?
 
 DATABASE_FILE = "avatardb.sql" 
 ###
 
 
 def main():
-    #installPrograms()
-    #setupAvatarService()
+    # Installs apache2, php5, mysql and configures mysql root login details
+    # in addition installs git and debconf-utils for a fully automated installation
+    installPrograms()
+    
+    # Fetches avatar-service files from github and imports the database 
+    setupAvatarService()
+    
+    # Creates a custom user for the mysql server with the info configured above
     createMysqlUser()
+    
+    # automatically updates action/dbconnect.php with the mysql user and password info provided above
+    updateMysqlConfig()
 """
     if passwordSet:
         installPrograms()
@@ -62,8 +72,8 @@ def installPrograms():
         os.remove(preseedFile)
         
     with open(preseedFile, 'a') as pre:
-        pre.write("mysql-server-5.1 mysql-server/" + "root_password password " + MYSQL_ROOT_PWD + "\n")
-        pre.write("mysql-server-5.1 mysql-server/" + "root_password_again password " + MYSQL_ROOT_PWD + "\n")
+        pre.write("mysql-server-5.1 mysql-server/" + "root_password password " + MYSQL_ROOT_PW + "\n")
+        pre.write("mysql-server-5.1 mysql-server/" + "root_password_again password " + MYSQL_ROOT_PW + "\n")
         pre.write("mysql-server-5.1 mysql-server/" + "start_on_boot boolean true")
     
     #install mysql using variables from preseed
@@ -92,7 +102,7 @@ def setupAvatarService():
     subprocess.call("git clone " + GIT_SOURCE + " " + AVATAR_ROOT, shell=True)
     
     #setup database, import from a file
-    subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_USER +" -p" + MYSQL_USER_PWD + " < " + AVATAR_ROOT + DATABASE_FILE, shell=True)
+    subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_USER +" -p" + MYSQL_USER_PW + " < " + AVATAR_ROOT + DATABASE_FILE, shell=True)
 
 
 def cleanUp(file):
@@ -106,16 +116,39 @@ def createMysqlUser():
     if os.path.isfile(createUserTmpFile):
         os.remove(createUserTmpFile)
     with open(createUserTmpFile, 'a') as f:
-        f.write("GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON " + DB_NAME + ".* TO '" + MYSQL_USER + "'@'" + MYSQL_HOST + "' IDENTIFIED BY '" + MYSQL_USER_PWD + "'")
-    subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_ROOT +" -p" + MYSQL_ROOT_PWD + " < " + createUserTmpFile, shell=True)
+        f.write("GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON " + DB_NAME + ".* TO '" + MYSQL_USER + "'@'" + MYSQL_HOST + "' IDENTIFIED BY '" + MYSQL_USER_PW + "'")
+    subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_ROOT +" -p" + MYSQL_ROOT_PW + " < " + createUserTmpFile, shell=True)
     cleanUp(createUserTmpFile)
+
+
+def updateMysqlConfig():
+    dbConfigFileIn = "../action/dbconnect.php"
+    dbConfigFileOut = "tmp"
+    
+    identhost="<<HOST_NOT_SET>>"
+    identuser="<<USER_NOT_SET>>"
+    identpw="<<PW_NOT_SET>>"
+    
+    with open(dbConfigFileIn, 'r') as feed:
+        for line in feed:
+            with open(dbConfigFileOut, 'a') as out:
+                if identhost in line:
+                    out.write(line.replace(identhost, MYSQL_HOST),)
+                elif identuser in line:
+                    out.write(line.replace(identuser, MYSQL_USER),)
+                elif identpw in line:
+                    out.write(line.replace(identpw, MYSQL_USER_PW),)
+                else:
+                    out.write(line)
+    os.remove(dbConfigFileIn)
+    os.rename(dbConfigFileOut, dbConfigFileIn)
 
 
 if __name__ == "__main__":
     parser = OptionParser()
-    parser.add_option("-p", "--password", dest="sudopwd")
+    parser.add_option("-p", "--password", dest="sudopw")
     (options, args) = parser.parse_args()
-    if options.sudopwd:
-        sudopwd = options.sudopwd
+    if options.sudopw:
+        sudopw = options.sudopw
         passwordSet=True
     main()
