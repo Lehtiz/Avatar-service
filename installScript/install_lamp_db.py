@@ -45,8 +45,8 @@ def main():
     
 def installPrograms():
 
-    #preq for mysql installation parameters
-    subprocess.call("sudo apt-get install debconf-utils",shell=True)
+    #preq for mysql installation parameters, git sources
+    subprocess.call("sudo apt-get install debconf-utils git",shell=True)
     
     #apache2, php
     subprocess.call("sudo apt-get -y install apache2 php5-mysql libapache2-mod-php5", shell=True)
