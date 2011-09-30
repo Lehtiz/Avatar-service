@@ -77,7 +77,7 @@ def setupAvatarService():
     #presume tundra build already (TODO: add tundra build here?)
     
     #mod apaches default www home (TODO: custom www home)
-    subprocess.call("sudo chown -R " + getpass.getuser() + WEB_ROOT, shell=True)
+    subprocess.call("sudo chown -R " + getpass.getuser() + " " + WEB_ROOT, shell=True)
 
     #check folder dest and move to webroot/backup/ if exists 
     if os.path.exists(AVATAR_ROOT):
