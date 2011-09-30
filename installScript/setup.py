@@ -22,19 +22,21 @@ WEB_ROOT = "/var/www/"
 AVATAR_ROOT = WEB_ROOT + "avatar/"
 
 #rootpw set during install
+MYSQL_HOST = "localhost"
+MYSQL_ROOT = "root"
 MYSQL_ROOT_PWD = "N73J"
 
-MYSQL_HOST = "localhost"
-MYSQL_USER = "root"
-MYSQL_USER_PWD = MYSQL_ROOT_PWD # TODO: create custom user ?
+MYSQL_USER = "avatarservice"
+MYSQL_USER_PWD = "avatarpw123" # TODO: create custom user ?
 
 DATABASE_FILE = "avatardb.sql" 
 ###
 
 
 def main():
-    installPrograms()
-    setupAvatarService()
+    #installPrograms()
+    #setupAvatarService()
+    createMysqlUser()
 """
     if passwordSet:
         installPrograms()
@@ -98,10 +100,15 @@ def cleanUp(file):
         os.remove(file)
 
 
-def createMysqlUser()
-    subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_USER +" -p" + MYSQL_USER_PWD + " < " + 
-    "GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON database1.* TO '" + 
-    MYSQL_USER + "'@'" + MYSQL_HOST + "' IDENTIFIED BY '" + MYSQL_USER_PWD + "'";
+def createMysqlUser():
+    DB_NAME = "avatar"
+    createUserTmpFile = "dbuser.sql"
+    if os.path.isfile(createUserTmpFile):
+        os.remove(createUserTmpFile)
+    with open(createUserTmpFile, 'a') as f:
+        f.write("GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON " + DB_NAME + ".* TO '" + MYSQL_USER + "'@'" + MYSQL_HOST + "' IDENTIFIED BY '" + MYSQL_USER_PWD + "'")
+    subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_ROOT +" -p" + MYSQL_ROOT_PWD + " < " + createUserTmpFile, shell=True)
+    cleanUp(createUserTmpFile)
 
 
 if __name__ == "__main__":
