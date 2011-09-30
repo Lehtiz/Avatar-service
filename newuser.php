@@ -16,7 +16,10 @@ echo "
     <tr><td>Password:</td><td><input type='password' name='txtPassword' /></td></tr>
 <table></center>
 <br />
-<input type='submit' value='Submit' />
+<table>
+<tr><td><input type='submit' value='Submit' /></td>
+<td><input type='button' value='Cancel' onclick='window.location.href=&quot;index.php&quot;'></td></tr>
+</table>
 </form>
 </fieldset>
 ";

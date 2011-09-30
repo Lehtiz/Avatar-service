@@ -11,4 +11,4 @@
         <link rel="stylesheet" type="text/css" href="main.css" />
     
     <body onLoad="document.getElementById('1').focus()">
-        <div id='body'>
+        <div id='center'>
