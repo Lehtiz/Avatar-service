@@ -129,7 +129,7 @@ def updateMysqlConfig():
     identuser="<<USER_NOT_SET>>"
     identpw="<<PW_NOT_SET>>"
     
-    os.chdir("../action")
+    os.chdir(AVATAR_ROOT + "action/")
     
     with open(dbConfigFileIn, 'r') as feed:
         for line in feed:
