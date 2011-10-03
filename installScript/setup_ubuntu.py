@@ -30,7 +30,7 @@ MYSQL_ROOT_PW = "N73J"
 MYSQL_USER = "avatarservice"
 MYSQL_USER_PW = "avatarpw123"
 
-DATABASE_FILE = "avatardb.sql",
+DATABASE_FILE = "avatardb.sql"
 DB_NAME = "avatar"
 ###
 # if useRoot is set to true, mysql root account will be used for database connections
@@ -65,7 +65,7 @@ def main():
 def installPrograms():
 
     #preq for mysql installation parameters, git sources
-    subprocess.call("sudo apt-get -y install debconf-utils git",shell=True)
+    subprocess.call("sudo apt-get -y install debconf-utils git", shell=True)
     
     #apache2, php
     subprocess.call("sudo apt-get -y install apache2 php5-mysql libapache2-mod-php5", shell=True)
@@ -109,7 +109,7 @@ def setupAvatarService():
     subprocess.call("git clone " + GIT_SOURCE + " " + AVATAR_ROOT, shell=True)
     
     #setup database, import from a file
-    subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_ROOT +" -p" + MYSQL_ROOT_PW + " < " + AVATAR_ROOT + DATABASE_FILE, shell=True)
+    subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_ROOT + " -p" + MYSQL_ROOT_PW + " < " + AVATAR_ROOT + DATABASE_FILE, shell=True)
 
 
 def cleanUp(file):
