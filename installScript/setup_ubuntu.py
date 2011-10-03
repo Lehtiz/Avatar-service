@@ -30,7 +30,12 @@ MYSQL_ROOT_PW = "N73J"
 MYSQL_USER = "avatarservice"
 MYSQL_USER_PW = "avatarpw123"
 
-DATABASE_FILE = "avatardb.sql" 
+DATABASE_FILE = "avatardb.sql",
+DB_NAME = "avatar"
+###
+# if useRoot is set to true, mysql root account will be used for database connections
+# False creates a new user for the database
+useRoot = False
 ###
 
 
@@ -42,11 +47,13 @@ def main():
     # Fetches avatar-service files from github and imports the database 
     setupAvatarService()
     
-    # Creates a custom user for the mysql server with the info configured above
-    createMysqlUser()
-    
-    # automatically updates action/dbconnect.php with the mysql user and password info provided above
-    updateMysqlConfig()
+    if not useRoot:
+        createMysqlUser(MYSQL_HOST, MYSQL_USER, MYSQL_USER_PW)
+        updateMysqlConfig(MYSQL_HOST, MYSQL_USER, MYSQL_USER_PW)
+    else:
+        updateMysqlConfig(MYSQL_HOST, MYSQL_ROOT, MYSQL_ROOT_PW)
+
+
 """
     if passwordSet:
         installPrograms()
@@ -54,7 +61,7 @@ def main():
     else:
         print("no password given")
 """
-    
+
 def installPrograms():
 
     #preq for mysql installation parameters, git sources
@@ -109,19 +116,18 @@ def cleanUp(file):
     if os.path.isfile(file):
         os.remove(file)
 
-
-def createMysqlUser():
-    DB_NAME = "avatar"
+# Creates a custom user for the mysql server with the info configured above
+def createMysqlUser(host, user, pw):
     createUserTmpFile = "dbuser.sql"
     if os.path.isfile(createUserTmpFile):
         os.remove(createUserTmpFile)
     with open(createUserTmpFile, 'a') as f:
         f.write("GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON " + DB_NAME + ".* TO '" + MYSQL_USER + "'@'" + MYSQL_HOST + "' IDENTIFIED BY '" + MYSQL_USER_PW + "'")
-    subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_ROOT +" -p" + MYSQL_ROOT_PW + " < " + createUserTmpFile, shell=True)
+    subprocess.call("mysql -h" + host + " -u" + user +" -p" + pw + " < " + createUserTmpFile, shell=True)
     cleanUp(createUserTmpFile)
 
-
-def updateMysqlConfig():
+# automatically updates action/dbconnect.php with the mysql user and password info provided above
+def updateMysqlConfig(host, user, pw):
     dbConfigFileIn = "dbconnect.php"
     dbConfigFileOut = "tmp"
     
@@ -135,15 +141,15 @@ def updateMysqlConfig():
         for line in feed:
             with open(dbConfigFileOut, 'a') as out:
                 if identhost in line:
-                    out.write(line.replace(identhost, MYSQL_HOST),)
+                    out.write(line.replace(identhost, host),)
                 elif identuser in line:
-                    out.write(line.replace(identuser, MYSQL_USER),)
+                    out.write(line.replace(identuser, user),)
                 elif identpw in line:
-                    out.write(line.replace(identpw, MYSQL_USER_PW),)
+                    out.write(line.replace(identpw, pw),)
                 else:
                     out.write(line)
     #replace base file with the configured dbconnect
-    os.remove(dbConfigFileIn)
+    cleanUp(dbConfigFileIn)
     os.rename(dbConfigFileOut, dbConfigFileIn)
 
 
