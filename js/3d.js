@@ -118,8 +118,8 @@ function checkkeys() {
 function checkmouse() {
     if (mouseovercanvas) {
 	var mouseposition = mouse.getMousePosition();
-	mouseposition.x -= document.getElementById("container").offsetLeft;
-	mouseposition.y -= document.getElementById("container").offsetTop;
+	mouseposition.x -= document.getElementById("left").offsetLeft;
+	mouseposition.y -= document.getElementById("left").offsetTop;
 	
 	if (mouse.isButtonDown(GLGE.MI_RIGHT) & mouseposition.x && mouseposition.y) {
 

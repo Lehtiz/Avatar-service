@@ -1,19 +1,12 @@
 <?php include_once "top.php"; ?>
+<?php include_once "js.php"; ?>
 <?php
     if ($_SESSION["logged_in"]==true){
         print "
         <h3>Edit Identity & Avatar</h3>
-        <script type='text/javascript'>
-            websocket_host = 'localhost';
-            websocket_port = '9999';
-        </script>
-        <script type='text/javascript' src='js/global.js'></script>
-        <script type='text/javascript' src='js/3d.js'></script>
-        <script type='text/javascript' src='js/entities.js'></script>
-        <script type='text/javascript' src='js/socket.js'></script>
-            
+
         <div id='left'>
-            <canvas id='avatar' width='250' height='500'>
+            <canvas id='graffa' width='250' height='500'>
                 This text is displayed if your browser does not support HTML5 Canvas.
             </canvas>
         </div>
