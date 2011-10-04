@@ -122,8 +122,8 @@ def createMysqlUser(host, user, pw):
     if os.path.isfile(createUserTmpFile):
         os.remove(createUserTmpFile)
     with open(createUserTmpFile, 'a') as f:
-        f.write("GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON " + DB_NAME + ".* TO '" + MYSQL_USER + "'@'" + MYSQL_HOST + "' IDENTIFIED BY '" + MYSQL_USER_PW + "'")
-    subprocess.call("mysql -h" + host + " -u" + user +" -p" + pw + " < " + createUserTmpFile, shell=True)
+        f.write("GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON " + DB_NAME + ".* TO '" + user + "'@'" + host + "' IDENTIFIED BY '" + pw + "'")
+    subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_ROOT +" -p" + MYSQL_ROOT_PW + " < " + createUserTmpFile, shell=True)
     cleanUp(createUserTmpFile)
 
 # automatically updates action/dbconnect.php with the mysql user and password info provided above
