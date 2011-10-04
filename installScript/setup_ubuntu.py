@@ -19,23 +19,25 @@ passwordSet=False
 
 #avatar service sources
 GIT_SOURCE = "git://github.com/Lehtiz/Avatar-service.git"
+# default apache webroot
 WEB_ROOT = "/var/www/"
 AVATAR_ROOT = WEB_ROOT + "avatar/"
 
-#rootpw set during install
 MYSQL_HOST = "localhost"
+#mysql root details set during install
 MYSQL_ROOT = "root"
 MYSQL_ROOT_PW = "N73J"
 
-MYSQL_USER = "avatarservice"
-MYSQL_USER_PW = "avatarpw123"
-
 DATABASE_FILE = "avatardb.sql"
 DB_NAME = "avatar"
+
 ###
 # if useRoot is set to true, mysql root account will be used for database connections
-# False creates a new user for the database
+# False creates a new user for the database, with the details below
 useRoot = False
+
+MYSQL_USER = "avatarservice"
+MYSQL_USER_PW = "avatarpw123"
 ###
 
 
