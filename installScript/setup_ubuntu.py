@@ -19,23 +19,25 @@ passwordSet=False
 
 #avatar service sources
 GIT_SOURCE = "git://github.com/Lehtiz/Avatar-service.git"
+# default apache webroot
 WEB_ROOT = "/var/www/"
 AVATAR_ROOT = WEB_ROOT + "avatar/"
 
-#rootpw set during install
 MYSQL_HOST = "localhost"
+#mysql root details set during install
 MYSQL_ROOT = "root"
 MYSQL_ROOT_PW = "N73J"
 
-MYSQL_USER = "avatarservice"
-MYSQL_USER_PW = "avatarpw123"
-
 DATABASE_FILE = "avatardb.sql"
 DB_NAME = "avatar"
+
 ###
 # if useRoot is set to true, mysql root account will be used for database connections
-# False creates a new user for the database
+# False creates a new user for the database, with the details below
 useRoot = False
+
+MYSQL_USER = "avatarservice"
+MYSQL_USER_PW = "avatarpw123"
 ###
 
 
@@ -61,6 +63,7 @@ def main():
     else:
         print("no password given")
 """
+
 
 def installPrograms():
 
@@ -110,11 +113,16 @@ def setupAvatarService():
     
     #setup database, import from a file
     subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_ROOT + " -p" + MYSQL_ROOT_PW + " < " + AVATAR_ROOT + DATABASE_FILE, shell=True)
+    
+    #setup glge for rendering in browser
+    setupGlge()
+    getJquery()
 
 
 def cleanUp(file):
     if os.path.isfile(file):
         os.remove(file)
+
 
 # Creates a custom user for the mysql server with the info configured above
 def createMysqlUser(host, user, pw):
@@ -125,6 +133,7 @@ def createMysqlUser(host, user, pw):
         f.write("GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON " + DB_NAME + ".* TO '" + user + "'@'" + host + "' IDENTIFIED BY '" + pw + "'")
     subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_ROOT +" -p" + MYSQL_ROOT_PW + " < " + createUserTmpFile, shell=True)
     cleanUp(createUserTmpFile)
+
 
 # automatically updates action/dbconnect.php with the mysql user and password info provided above
 def updateMysqlConfig(host, user, pw):
@@ -151,6 +160,30 @@ def updateMysqlConfig(host, user, pw):
     #replace base file with the configured dbconnect
     cleanUp(dbConfigFileIn)
     os.rename(dbConfigFileOut, dbConfigFileIn)
+
+
+#get glge, build
+def setupGlge():
+    GLGE_SOURCE = "git://github.com/supereggbert/GLGE.git"
+    GLGE_DIR = "glge/"
+    os.chdir(AVATAR_ROOT)
+    subprocess.call("git clone " + GLGE_SOURCE + " " + GLGE_DIR, shell=True)
+    os.chdir(AVATAR_ROOT + GLGE_DIR)
+    #submodules seems to need a github key to have been set at the computer so omitting these; docs and minifying
+    #subprocess.call("git submodule init", shell=True)
+    #subprocess.call("git submodule update", shell=True)
+    #build
+    subprocess.call("./build.js --without-documents", shell=True) #--without-documents
+
+
+def getJquery():
+    import urllib
+    filename = "jquery-1.6.1.js"
+    url = "http://code.jquery.com/" + filename
+    os.chdir(AVATAR_ROOT + "js/")
+    source = urllib.urlopen(url).read()
+    with open(filename, 'w') as file:
+        file.write(source)
 
 
 if __name__ == "__main__":
