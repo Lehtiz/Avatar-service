@@ -42,7 +42,7 @@ MYSQL_USER_PW = "avatarpw123"
 
 
 def main():
-    if os.getuid() == 0: #if ran as sudo
+    if os.getenv("USER") == "root": #if ran with root
         # Installs apache2, php5, mysql and configures mysql root login details
         # in addition installs git and debconf-utils for a fully automated installation
         installPrograms()
