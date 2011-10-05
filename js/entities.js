@@ -38,8 +38,8 @@ function Entity(id) {
 	var id = params['id'];
 	this.parent = id;
 
-	//this.url = "http://localhost:8000/man_mesh+armature_2.5.dae";
-        this.url = "http://www.realxtend.org/webnaali/avatar/man_mesh%2Barmature_2.5.dae";
+	this.url = "models/man_mesh+armature_2.5.dae";
+        //this.url = "http://www.realxtend.org/webnaali/avatar/man_mesh%2Barmature_2.5.dae";
 
 	if (this.url) {
 	    this.mesh = new GLGE.Collada();
