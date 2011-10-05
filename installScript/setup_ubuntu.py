@@ -42,18 +42,21 @@ MYSQL_USER_PW = "avatarpw123"
 
 
 def main():
-    # Installs apache2, php5, mysql and configures mysql root login details
-    # in addition installs git and debconf-utils for a fully automated installation
-    installPrograms()
-    
-    # Fetches avatar-service files from github and imports the database 
-    setupAvatarService()
-    
-    if not useRoot:
-        createMysqlUser(MYSQL_HOST, MYSQL_USER, MYSQL_USER_PW)
-        updateMysqlConfig(MYSQL_HOST, MYSQL_USER, MYSQL_USER_PW)
+    if os.getuid() == 0: #if ran as sudo
+        # Installs apache2, php5, mysql and configures mysql root login details
+        # in addition installs git and debconf-utils for a fully automated installation
+        installPrograms()
+        
+        # Fetches avatar-service files from github and imports the database 
+        setupAvatarService()
+        
+        if not useRoot:
+            createMysqlUser(MYSQL_HOST, MYSQL_USER, MYSQL_USER_PW)
+            updateMysqlConfig(MYSQL_HOST, MYSQL_USER, MYSQL_USER_PW)
+        else:
+            updateMysqlConfig(MYSQL_HOST, MYSQL_ROOT, MYSQL_ROOT_PW)
     else:
-        updateMysqlConfig(MYSQL_HOST, MYSQL_ROOT, MYSQL_ROOT_PW)
+        print "Script needs to be run with sudo (apt-get install)"
 
 
 """
