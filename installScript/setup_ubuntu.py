@@ -116,7 +116,8 @@ def setupAvatarService():
     
     #setup glge for rendering in browser
     setupGlge()
-    getJquery()
+    # added jquery to repo
+    #getJquery()
 
 
 def cleanUp(file):
