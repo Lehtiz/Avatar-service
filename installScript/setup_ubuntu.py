@@ -14,6 +14,9 @@ import pexpect
 import fileinput
 
 ###
+rex = "/home/" + getpass.getuser() + "/src/realxtend/"
+rexBinDir = rex + "/naali/bin/"
+
 sudopw = "NOTSET"
 passwordSet=False
 
@@ -188,7 +191,28 @@ def getJquery():
     source = urllib.urlopen(url).read()
     with open(filename, 'w') as file:
         file.write(source)
+        
 
+def buildTundra():
+    if not os.path.isdir(rex):
+        os.mkdir(rex)
+    os.chdir(rex)
+    subprocess.call("git clone -b tundra git://github.com/realXtend/naali.git", shell=True)
+    #custom ogre
+    os.chdir(rex + "naali/tools/")
+    subprocess.call("bash build-ubuntu-deps.bash", shell=True)
+    enableWebSocket()
+
+
+def enableWebSocket():
+    path = rexBinDir + "pymodules/"
+    port = "9999"
+    filename = "websocket.ini"
+    file = path + filename
+    with open(file, 'w') as f:
+        f.write("[websocketserver.NaaliWebsocketServer]\n")
+        f.write("port=" + port)
+        
 
 if __name__ == "__main__":
     parser = OptionParser()
