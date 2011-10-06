@@ -45,7 +45,7 @@
         <script type='text/javascript' src='glge/src/physics/glge_physicsconstraintpoint.js'></script> 
 
         <!-- jQuery --> 
-        <script type='text/javascript' src='jquery/jquery-1.6.1.js'></script> 
+        <script type='text/javascript' src='js/jquery-1.6.1.js'></script> 
 
         <!-- "Settings" --> 
         <script type='text/javascript'>
