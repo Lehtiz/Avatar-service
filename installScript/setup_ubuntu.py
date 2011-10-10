@@ -14,7 +14,8 @@ import pexpect
 import fileinput
 
 ###
-rex = "/home/" + getpass.getuser() + "/src/realxtend/"
+user = os.getenv("SUDO_USER")
+rex = "/home/" + user + "/src/realxtend/"
 rexBinDir = rex + "/naali/bin/"
 
 sudopw = "NOTSET"
@@ -58,6 +59,7 @@ def main():
             updateMysqlConfig(MYSQL_HOST, MYSQL_USER, MYSQL_USER_PW)
         else:
             updateMysqlConfig(MYSQL_HOST, MYSQL_ROOT, MYSQL_ROOT_PW)
+            
     else:
         print "Script needs to be run with sudo (apt-get install)"
 
@@ -125,13 +127,8 @@ def setupAvatarService():
     
     #setup glge for rendering in browser
     setupGlge()
-    # added jquery to repo
-    #getJquery()
-
-
-def cleanUp(file):
-    if os.path.isfile(file):
-        os.remove(file)
+    #getJquery() #added jquery to repo
+    #unRoot(AVATAR_ROOT)
 
 
 # Creates a custom user for the mysql server with the info configured above
@@ -195,6 +192,29 @@ def getJquery():
     with open(filename, 'w') as file:
         file.write(source)
 
+
+def enableWebSocket():
+    path = rexBinDir + "pymodules/"
+    if os.path.isdir(path):
+        port = "9999"
+        filename = "websocket.ini"
+        file = path + filename
+        with open(file, 'w') as f:
+            f.write("[websocketserver.NaaliWebsocketServer]\n")
+            f.write("port=" + port)
+        unRoot(file)
+    else:
+        print "Realxtend Tundra does not appear to be installed,\n please install and build it then run this script again"
+
+
+def unRoot(target):
+    subprocess.call("chown -R "+ user +" " + target,shell=True)
+
+
+def cleanUp(file):
+    if os.path.isfile(file):
+        os.remove(file)
+
 """
 def buildTundra():
     if not os.path.isdir(rex):
@@ -216,16 +236,6 @@ def setupOgre():
     subprocess.call("hg clone http://bitbucket.org/sinbad/ogre/ -u v1-7-3", shell=True)
     #build ogre
 """
-
-def enableWebSocket():
-    path = rexBinDir + "pymodules/"
-    port = "9999"
-    filename = "websocket.ini"
-    file = path + filename
-    with open(file, 'w') as f:
-        f.write("[websocketserver.NaaliWebsocketServer]\n")
-        f.write("port=" + port)
-        
 
 if __name__ == "__main__":
     parser = OptionParser()
