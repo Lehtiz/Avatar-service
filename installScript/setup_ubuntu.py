@@ -73,8 +73,8 @@ def main():
 
 def installPrograms():
 
-    #preq for mysql installation parameters, git sources
-    subprocess.call("sudo apt-get -y install debconf-utils git", shell=True)
+    #preq for mysql installation parameters, git sources, nodejs for glge build
+    subprocess.call("sudo apt-get -y install debconf-utils git nodejs", shell=True)
     
     #apache2, php
     subprocess.call("sudo apt-get -y install apache2 php5-mysql libapache2-mod-php5", shell=True)
@@ -110,9 +110,12 @@ def setupAvatarService():
     #mod apaches default www home (TODO: custom www home)
     subprocess.call("sudo chown -R " + getpass.getuser() + " " + WEB_ROOT, shell=True)
 
-    #check folder dest and move to webroot/backup/ if exists 
+    #check folder dest and move to webroot/backup/ if exists
+    backupDir = AVATAR_ROOT, WEB_ROOT + "backup/"
     if os.path.exists(AVATAR_ROOT):
-        shutil.move(AVATAR_ROOT, WEB_ROOT + "backup/")
+        if os.path.exists(backupDir):
+            shutil.rmtreebackupDir
+        shutil.move(backupDir)
         
     #get sources from github
     subprocess.call("git clone " + GIT_SOURCE + " " + AVATAR_ROOT, shell=True)
