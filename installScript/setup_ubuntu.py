@@ -191,18 +191,28 @@ def getJquery():
     source = urllib.urlopen(url).read()
     with open(filename, 'w') as file:
         file.write(source)
-        
 
+"""
 def buildTundra():
     if not os.path.isdir(rex):
         os.mkdir(rex)
     os.chdir(rex)
     subprocess.call("git clone -b tundra git://github.com/realXtend/naali.git", shell=True)
-    #custom ogre
+    setupOgre()
     os.chdir(rex + "naali/tools/")
     subprocess.call("bash build-ubuntu-deps.bash", shell=True)
     enableWebSocket()
 
+
+def setupOgre():
+    #custom ogre
+    ogre = "/home/" + getpass.getuser() + "/src/ogre/"
+    os.chdir(ogre)
+    #get ogre
+    subprocess.call("sudo apt-get install mercurial", shell=True)
+    subprocess.call("hg clone http://bitbucket.org/sinbad/ogre/ -u v1-7-3", shell=True)
+    #build ogre
+"""
 
 def enableWebSocket():
     path = rexBinDir + "pymodules/"

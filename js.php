@@ -50,6 +50,7 @@
         <!-- "Settings" --> 
         <script type='text/javascript'>
             url_to_static = 'models/aula_v7_base.dae';
+            //websocket_host = 'playsign.fi';
             websocket_host = 'localhost';
             websocket_port = '9999';
         </script>
