@@ -108,9 +108,6 @@ def installPrograms():
 
 def setupAvatarService():
     #presume tundra build already (TODO: add tundra build here?)
-    
-    #mod apaches default www home (TODO: custom www home)
-    subprocess.call("sudo chown -R " + getpass.getuser() + " " + WEB_ROOT, shell=True)
 
     #check folder dest and move to webroot/backup/ if exists
     backupDir = WEB_ROOT + "backup/"
@@ -128,7 +125,7 @@ def setupAvatarService():
     #setup glge for rendering in browser
     setupGlge()
     #getJquery() #added jquery to repo
-    #unRoot(AVATAR_ROOT)
+    #ownForUser(AVATAR_ROOT)
     enableWebSocket() #remove if rexbuild implemented
 
 
@@ -206,12 +203,12 @@ def enableWebSocket():
         with open(file, 'w') as f:
             f.write("[websocketserver.NaaliWebsocketServer]\n")
             f.write("port=" + port)
-        unRoot(file)
+        ownForUser(file)
     else:
         print "Realxtend Tundra does not appear to be installed,\nplease build it and run this script again"
 
 
-def unRoot(target):
+def ownForUser(target):
     subprocess.call("chown -R "+ user + ":" + user + " " + target, shell=True)
 
 
