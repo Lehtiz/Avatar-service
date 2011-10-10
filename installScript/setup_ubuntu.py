@@ -111,11 +111,11 @@ def setupAvatarService():
     subprocess.call("sudo chown -R " + getpass.getuser() + " " + WEB_ROOT, shell=True)
 
     #check folder dest and move to webroot/backup/ if exists
-    backupDir = AVATAR_ROOT, WEB_ROOT + "backup/"
+    backupDir = WEB_ROOT + "backup/"
     if os.path.exists(AVATAR_ROOT):
         if os.path.exists(backupDir):
-            shutil.rmtreebackupDir
-        shutil.move(backupDir)
+            shutil.rmtree(backupDir)
+        shutil.move(AVATAR_ROOT, backupDir)
         
     #get sources from github
     subprocess.call("git clone " + GIT_SOURCE + " " + AVATAR_ROOT, shell=True)
