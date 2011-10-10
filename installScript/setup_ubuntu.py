@@ -122,13 +122,14 @@ def setupAvatarService():
     #get sources from github
     subprocess.call("git clone " + GIT_SOURCE + " " + AVATAR_ROOT, shell=True)
     
-    #setup database, import from a file
-    subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_ROOT + " -p" + MYSQL_ROOT_PW + " < " + AVATAR_ROOT + DATABASE_FILE, shell=True)
+    #setup avatar-service database, import from a file
+    dbRootImportFromFile(AVATAR_ROOT + DATABASE_FILE)
     
     #setup glge for rendering in browser
     setupGlge()
     #getJquery() #added jquery to repo
     #unRoot(AVATAR_ROOT)
+    enableWebSocket() #remove if rexbuild implemented
 
 
 # Creates a custom user for the mysql server with the info configured above
@@ -138,8 +139,11 @@ def createMysqlUser(host, user, pw):
         os.remove(createUserTmpFile)
     with open(createUserTmpFile, 'a') as f:
         f.write("GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON " + DB_NAME + ".* TO '" + user + "'@'" + host + "' IDENTIFIED BY '" + pw + "'")
-    subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_ROOT +" -p" + MYSQL_ROOT_PW + " < " + createUserTmpFile, shell=True)
+    dbRootImportFromFile(createUserTmpFile)
     cleanUp(createUserTmpFile)
+
+def dbRootImportFromFile(inputfile):
+    subprocess.call("mysql -h" + MYSQL_HOST + " -u" + MYSQL_ROOT +" -p" + MYSQL_ROOT_PW + " < " + inputfile, shell=True)
 
 
 # automatically updates action/dbconnect.php with the mysql user and password info provided above
@@ -204,11 +208,11 @@ def enableWebSocket():
             f.write("port=" + port)
         unRoot(file)
     else:
-        print "Realxtend Tundra does not appear to be installed,\n please install and build it then run this script again"
+        print "Realxtend Tundra does not appear to be installed,\nplease build it and run this script again"
 
 
 def unRoot(target):
-    subprocess.call("chown -R "+ user +" " + target,shell=True)
+    subprocess.call("chown -R "+ user + ":" + user + " " + target, shell=True)
 
 
 def cleanUp(file):
@@ -229,7 +233,7 @@ def buildTundra():
 
 def setupOgre():
     #custom ogre
-    ogre = "/home/" + getpass.getuser() + "/src/ogre/"
+    ogre = "/home/" + user + "/src/ogre/"
     os.chdir(ogre)
     #get ogre
     subprocess.call("sudo apt-get install mercurial", shell=True)
