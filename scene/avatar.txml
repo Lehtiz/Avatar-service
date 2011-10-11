@@ -53,7 +53,7 @@
  <entity id="3">
   <component type="EC_Mesh" sync="1">
    <attribute value="0,0,0,90,0,180,0.14,0.2,0.14" name="Transform"/>
-   <attribute value="file://WoodPallet.mesh" name="Mesh ref"/>
+   <attribute value="file://floor.mesh" name="Mesh ref"/>
    <attribute value="" name="Skeleton ref"/>
    <attribute value="" name="Mesh materials"/>
    <attribute value="0" name="Draw distance"/>

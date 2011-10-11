@@ -1,7 +1,8 @@
 <?php include_once "top.php"; ?>
-<?php include_once "js.php"; ?>
+
 <?php
     if ($_SESSION["logged_in"]==true){
+    include_once "js.php";
         print "
         <h3>Edit Identity & Avatar</h3>
 
