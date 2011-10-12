@@ -8,7 +8,7 @@
     <created>2011-10-11T08:58:05</created>
     <modified>2011-10-11T08:58:05</modified>
     <unit name="meter" meter="1"/>
-    <up_axis>Z_UP</up_axis>
+    <up_axis>Y_UP</up_axis>
   </asset>
   <library_cameras>
     <camera id="Camera-camera" name="Camera">
@@ -177,7 +177,7 @@
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 0</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
-        <scale sid="scale">7 0.2 7</scale>
+        <scale sid="scale">20 0.2 20</scale>
         <instance_geometry url="#Cube-mesh">
           <bind_material>
             <technique_common>
@@ -187,7 +187,7 @@
         </instance_geometry>
       </node>
       <node id="Lamp" type="NODE">
-        <translate sid="location">4.076245 1.005454 5.903862</translate>
+        <translate sid="location">0 -10 0</translate>
         <rotate sid="rotationZ">0 0 1 106.9363</rotate>
         <rotate sid="rotationY">0 1 0 3.163707</rotate>
         <rotate sid="rotationX">1 0 0 37.26105</rotate>

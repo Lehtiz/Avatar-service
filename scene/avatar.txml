@@ -11,6 +11,17 @@
    <attribute value="" name="description"/>
    <attribute value="false" name="user-defined"/>
   </component>
+  <component type="EC_InputMapper" sync="1">
+   <attribute value="EC_InputMapper" name="Input context name"/>
+   <attribute value="102" name="Input context priority"/>
+   <attribute value="false" name="Take keyboard events over Qt"/>
+   <attribute value="false" name="Take mouse events over Qt"/>
+   <attribute value="" name="Mappings"/>
+   <attribute value="1" name="Action execution type"/>
+   <attribute value="1" name="Key modifiers enable"/>
+   <attribute value="true" name="Enable actions"/>
+   <attribute value="true" name="Trigger on keyrepeats"/>
+  </component>
  </entity>
  <entity id="2">
   <component type="EC_Mesh" sync="1">
@@ -27,9 +38,7 @@
    <attribute value="false" name="user-defined"/>
   </component>
   <component type="EC_Placeable" sync="1">
-   <attribute value="0 0 0" name="Position"/>
-   <attribute value="1 1 1" name="Scale"/>
-   <attribute value="1.38651,5.28407,0.408041,-107.224,-24.9409,-35.6025,1,1,1" name="Transform"/>
+   <attribute value="6.22041,12.1331,1.59841,-4.40204,12.4777,-84.1942,1,1,1" name="Transform"/>
    <attribute value="false" name="Show bounding box"/>
    <attribute value="true" name="Visible"/>
   </component>
@@ -46,13 +55,14 @@
    <attribute value="1 1 1" name="Angular factor"/>
    <attribute value="false" name="Phantom"/>
    <attribute value="true" name="Draw Debug"/>
-   <attribute value="-0.000317338068 -0.000515809166 -0.013057366" name="Linear velocity"/>
-   <attribute value="0.125439003 -0.0512680113 -0.00630187802" name="Angular velocity"/>
+   <attribute value="0.0133363567 -0.0115545318 0.00278809667" name="Linear velocity"/>
+   <attribute value="-0.778453588 -0.110972613 -0.0720468611" name="Angular velocity"/>
+   <attribute value="true" name="Gravity"/>
   </component>
  </entity>
  <entity id="3">
   <component type="EC_Mesh" sync="1">
-   <attribute value="0,0,0,90,0,180,0.14,0.2,0.14" name="Transform"/>
+   <attribute value="0,0,0,90,0,0,20,0.2,20" name="Transform"/>
    <attribute value="file://floor.mesh" name="Mesh ref"/>
    <attribute value="" name="Skeleton ref"/>
    <attribute value="" name="Mesh materials"/>
@@ -65,17 +75,15 @@
    <attribute value="false" name="user-defined"/>
   </component>
   <component type="EC_Placeable" sync="1">
-   <attribute value="0 0 0" name="Position"/>
-   <attribute value="1 1 1" name="Scale"/>
-   <attribute value="0,0,-5.0,0,0,0,100,1,100" name="Transform"/>
+   <attribute value="0,0,0,0,0,0,1,1,1" name="Transform"/>
    <attribute value="false" name="Show bounding box"/>
    <attribute value="true" name="Visible"/>
   </component>
   <component type="EC_RigidBody" sync="1">
    <attribute value="0" name="Mass"/>
    <attribute value="0" name="Shape type"/>
-   <attribute value="1 1 0.20" name="Size"/>
-   <attribute value="" name="Collision mesh ref"/>
+   <attribute value="39 39 0.400000006" name="Size"/>
+   <attribute value="file://floor.mesh" name="Collision mesh ref"/>
    <attribute value="0.5" name="Friction"/>
    <attribute value="0" name="Restitution"/>
    <attribute value="0" name="Linear damping"/>
@@ -86,6 +94,7 @@
    <attribute value="true" name="Draw Debug"/>
    <attribute value="0 0 0" name="Linear velocity"/>
    <attribute value="0 0 0" name="Angular velocity"/>
+   <attribute value="true" name="Gravity"/>
   </component>
  </entity>
 </scene>
