@@ -38,7 +38,7 @@ function Entity(id) {
 	var id = params['id'];
 	this.parent = id;
 
-	this.url = "models/man_mesh+armature_2.5.dae";
+	this.url = "models/avatar1.dae";
         //this.url = "http://www.realxtend.org/webnaali/avatar/man_mesh%2Barmature_2.5.dae";
 
 	if (this.url) {
