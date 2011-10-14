@@ -84,7 +84,7 @@ function connectHandler(signal, id) {
     handlers[signal] = handlers[signal] || [];
     handlers[signal].push(id);
 }
-
+/*
 function chatMessage(params) {
     var sender = params['sender'];
     var message = params['msg'];
@@ -108,4 +108,5 @@ window.onload = function() {
 	return false;
     });
 }
+*/
 
