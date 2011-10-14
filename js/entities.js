@@ -157,8 +157,10 @@ function setAttr(params) {
 
 			if (id == myid) {
 			    // sync Camera
-			    camera.setLoc(x, y + 1.5, z);
-			    camera.setRot(rotx, rotz - Math.PI / 2, roty);
+			    //camera.setLoc(x, y + 1.5, z - 15);
+			    //camera.setRot(rotx, rotz - Math.PI / 2, roty);
+			    camera.setLoc(0,2,3);
+			    camera.setRot(0, 0, 0);
 
                             //try to move it backwards for 3rd person view. parenting to av would be better, and probably easier too
                             //var ox = camera.getLocX();
@@ -167,7 +169,7 @@ function setAttr(params) {
                             //var camrot = camera.getRotation();
                             //camera.setLoc(ox + camrot.x, oy - camrot.y, oz - camrot.z);
 			    //that didn't work - resort to just hiding own av as a desperate fix
-	 	            collada.setScale(0.01);
+	 	            collada.setScale(0.1);
 			}
 		    }
 		}

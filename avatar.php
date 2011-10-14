@@ -7,7 +7,7 @@
         <h3>Edit Identity & Avatar</h3>
 
         <div id='left'>
-            <canvas id='graffa' width='600' height='338'>
+            <canvas id='graffa' width='250' height='500'>
                 This text is displayed if your browser does not support HTML5 Canvas.
             </canvas>
         </div>

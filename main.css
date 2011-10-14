@@ -15,15 +15,15 @@ background-color: #E2E2E2;
 
 #left{
     float: left;
-    width: 600px;
-    height: 338px;
+    width: 300px;
+    height: 539px;
     border-top: 1px solid #5F5F5F;
 }
 
 #right{
     float: right;
-    width: 600px;
-    height: 262px;
+    width: 299px;
+    height: 539px;
     border-top: 1px solid #5F5F5F;
 }
 

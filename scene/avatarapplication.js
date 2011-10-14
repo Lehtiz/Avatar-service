@@ -4,10 +4,10 @@
 // spawning avatars for clients (serverside). Note: this is not a startup script, but is meant to be
 // placed in an entity in a scene that wishes to implement avatar functionality.
 
-var avatar_area_size = 10;
+var avatar_area_size = 0;
 var avatar_area_x = 0;
 var avatar_area_y = 0;
-var avatar_area_z = 20;
+var avatar_area_z = 5;
 
 var isserver = server.IsRunning();
 
