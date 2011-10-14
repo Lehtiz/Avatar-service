@@ -11,7 +11,7 @@ CREATE TABLE user(
 
 INSERT INTO user(username, useremail, userpassword) VALUES('admin', 'admin@host.com', 'admin')
 
-
+/*
 CREATE TABLE(
     avatarid INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     avatarname VARCHAR(30) NOT NULL,
@@ -24,3 +24,4 @@ CREATE TABLE useravatar(
     userid,
     avatarid
 )ENGINE = InnoDB;
+*/

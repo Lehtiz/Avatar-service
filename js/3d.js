@@ -80,12 +80,8 @@ function render() {
     lasttime = now;
 }
 
-function checkkeys() {
-    if (!mouseovercanvas) {
-	return;
-    }
-
- 
+function checkkeys() { 
+    /* movement disabled, can enable later for sample anims
     if (keys.isKeyPressed(GLGE.KI_PAGE_UP)) {
 	addmove('Move,up');
     }
@@ -103,12 +99,13 @@ function checkkeys() {
     }
     if (keys.isKeyPressed(GLGE.KI_D)) {
 	addmove('Move,right');
-    }
+    }*/
+    //rotation direction from the cameras view
     if (keys.isKeyPressed(GLGE.KI_LEFT_ARROW)) {
-	addmove('Rotate,left');
+	addmove('Rotate,right');
     }
     if (keys.isKeyPressed(GLGE.KI_RIGHT_ARROW)) {
-	addmove('Rotate,right');
+	addmove('Rotate,left');
     }
 
     checkmove();
