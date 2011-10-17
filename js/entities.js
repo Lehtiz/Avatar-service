@@ -1,6 +1,4 @@
 /* Entity stuff is here
-   TODO:
-   * Get camera to better position
 */
 
 entities = {};
