@@ -12,6 +12,22 @@ function Entity(id) {
     }
 }
 
+//##############
+/*
+function showAvatar(avatar, scale){
+    this.url = avatar;
+    if(this.url){
+        this.mesh = GLGE.Collada();
+	    this.mesh.setId(this.parent);
+	    this.mesh.setDocument(this.url);
+	    this.mesh.setScale(scale);
+	    scene.addCollada(this.mesh);  
+    }
+}
+*/
+//##############
+
+
 (function (Components, $, undefined) {
 
     Components.EC_Placeable = function(params) {

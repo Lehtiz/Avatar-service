@@ -16,7 +16,7 @@ INSERT INTO user(username, useremail, userpassword) VALUES('admin', 'admin@host.
 CREATE TABLE avatar(
     avatarid INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     avatarname VARCHAR(30) NOT NULL,
-    avatarscale DECIMAL NOT NULL,
+    avatarscale DECIMAL(10,3) NOT NULL,
     avatarfile VARCHAR(100) NOT NULL
 )ENGINE = InnoDB;
 
