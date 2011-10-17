@@ -27,7 +27,7 @@
                 <br />
                 <form method='post' action='action/saveavatarchanges.php'>
                     Select avatar appearance:<br /><select name='drbavatar'>
-        ";
+        "; //onchange -> get, reload avatar?
         while ($dataArray = mysql_fetch_assoc($result)){
             print "<option value='$dataArray[avatarid]'>$dataArray[avatarname]</option>";
         }
