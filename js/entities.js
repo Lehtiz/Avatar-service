@@ -37,19 +37,18 @@ function Entity(id) {
 	this.parent = id;
 
 	this.url = "models/avatar1.dae";
-        //this.url = "http://www.realxtend.org/webnaali/avatar/man_mesh%2Barmature_2.5.dae";
-
+	
 	if (this.url) {
 	    this.mesh = new GLGE.Collada();
 	    this.mesh.setId(this.parent);
 	    this.mesh.setDocument(this.url);
-	    this.mesh.docURL = "avatar/";
+	    //this.mesh.docURL = "avatar/"; // does nothing?
 	    this.mesh.setScale(0.1);
-	    this.mesh.setRotY(3 * Math.PI / 2);
+	    //this.mesh.setRotY(3 * Math.PI / 2); //no visual change XYZ?
 	    scene.addCollada(this.mesh);
 	    // For some reason setting the animation frames is not
 	    //executed immidiately so we delay execution a bit
-	    window.setTimeout(function() {
+	    /*window.setTimeout(function() {
 		var components = entities[id].components;
 		for (i = 0; i < components.length; i++) {
 		    if (components[i].componentName == "EC_Avatar") {
@@ -57,7 +56,7 @@ function Entity(id) {
 			break;
 		    }
 		}		
-	    }, 10000);
+	    }, 10000);*/
 	}
     }
     
