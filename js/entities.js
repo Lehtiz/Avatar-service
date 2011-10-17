@@ -166,14 +166,14 @@ function setAttr(params) {
 			collada.setLocZ(z);
 			collada.setRotX(rotx + 3 * Math.PI / 2);
     			collada.setRotY(roty);
-			collada.setRotZ(rotz - 3 * Math.PI / 2);
+			collada.setRotZ(rotz);
 
 			if (id == myid) {
 			    // sync Camera
 			    //camera.setLoc(x, y + 1.5, z - 15);
 			    //camera.setRot(rotx, rotz - Math.PI / 2, roty);
-			    camera.setLoc(3, 1.9, 0);
-			    camera.setRot(0, -4.71, 0);
+			    camera.setLoc(0, 1.9, 3);
+			    camera.setRot(0, 0, 0);
 
                             //try to move it backwards for 3rd person view. parenting to av would be better, and probably easier too
                             //var ox = camera.getLocX();
