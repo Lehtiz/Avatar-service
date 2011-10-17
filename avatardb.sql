@@ -6,10 +6,11 @@ CREATE TABLE user(
     userid INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     username VARCHAR(30) NOT NULL,
     useremail VARCHAR(50) NOT NULL,
-    userpassword VARCHAR(30) NOT NULL
+    userpassword VARCHAR(256) NOT NULL
 )ENGINE = InnoDB;
 
-INSERT INTO user(username, useremail, userpassword) VALUES('admin', 'admin@host.com', 'admin');
+/*admin::admin*/
+INSERT INTO user(username, useremail, userpassword) VALUES('admin', 'admin@host.com', '$1$FSL.ycce$TYNM1ZN4MY/vZPNi42Zoj0');
 
 
 CREATE TABLE avatar(

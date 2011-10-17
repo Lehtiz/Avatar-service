@@ -24,7 +24,8 @@ else{
     $dataArray = mysql_fetch_assoc($result);
     $db_user_name = $dataArray[username];
     $db_user_password = $dataArray[userpassword];
-    if (strcmp($username,$db_user_name)==0 && strcmp($password,$db_user_password)==0)
+    //if (strcmp($username,$db_user_name)==0 && strcmp($password,$db_user_password)==0)
+    if (strcmp($username,$db_user_name)==0 && crypt($password,$db_user_password)==$db_user_password)
     {
         $_SESSION["logged_in"]=true;
 

@@ -5,7 +5,7 @@ include_once "dbconnect.php";
 
 $username = mysql_real_escape_string(strip_tags($_POST["txtUsername"]));
 $email = mysql_real_escape_string(strip_tags($_POST["txtEmail"]));
-$password = mysql_real_escape_string(strip_tags($_POST["txtPassword"]));
+$password = crypt(mysql_real_escape_string(strip_tags($_POST["txtPassword"])));
 
 if(empty($username) || empty($email) || empty($password)){
     header("location:../newuser.php");
