@@ -18,6 +18,7 @@ background-color: #E2E2E2;
     width: 300px;
     height: 539px;
     border-top: 1px solid #5F5F5F;
+    border-right: 1px solid #5F5F5F;
 }
 
 #right{
@@ -25,8 +26,4 @@ background-color: #E2E2E2;
     width: 299px;
     height: 539px;
     border-top: 1px solid #5F5F5F;
-}
-
-#avatar{
-    margin-top: 20px;
 }

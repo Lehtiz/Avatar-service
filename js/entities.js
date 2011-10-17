@@ -160,7 +160,7 @@ function setAttr(params) {
 			    //camera.setLoc(x, y + 1.5, z - 15);
 			    //camera.setRot(rotx, rotz - Math.PI / 2, roty);
 			    camera.setLoc(0,2,3);
-			    camera.setRot(0, 0, 0);
+			    camera.setRot(-0.035, 0, 0);
 
                             //try to move it backwards for 3rd person view. parenting to av would be better, and probably easier too
                             //var ox = camera.getLocX();
