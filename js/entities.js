@@ -182,7 +182,7 @@ function setAttr(params) {
                             //var camrot = camera.getRotation();
                             //camera.setLoc(ox + camrot.x, oy - camrot.y, oz - camrot.z);
 			    //that didn't work - resort to just hiding own av as a desperate fix
-	 	            collada.setScale(0.1);
+	 	            //collada.setScale(0.1); //does nothing
 			}
 		    }
 		}
