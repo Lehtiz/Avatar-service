@@ -1,4 +1,4 @@
-<script type='text/javascript' src='glge/src/core/glge_math.js'></script> 
+<script <script type='text/javascript' src='glge/src/core/glge_math.js'></script> 
         <script type='text/javascript' src='glge/src/core/glge.js'></script> 
         <script type='text/javascript' src='glge/src/core/glge_event.js'></script> 
         <script type='text/javascript' src='glge/src/core/glge_quicknote.js'></script> 
