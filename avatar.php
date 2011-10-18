@@ -606,16 +606,11 @@ function updateObject(id, newdata) {
         }
         print "
                     </select><br />
-                    <input type='radio' name='group1' value='option1' checked> Option1<br />
-                    <input type='radio' name='group1' value='option2'> Option2<br />
-                    <input type='radio' name='group1' value='option3'> Option3<br />
                     <br />
                     <input type='submit' value='Save changes' />
                 </form>
             
-            <form method='link' action='action/logoutscript.php'>
-                <input type='submit' value='Log out'>
-            </form>
+            <a href='action/logoutscript.php'>Log out</a>
             
             </div>
         ";
