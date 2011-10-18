@@ -596,7 +596,7 @@ function updateObject(id, newdata) {
                 <br />
                 <p>Logged in as: $user_name</p>
                 <br />
-                <form method='post' action='action/saveavatarchanges.php'>
+                <form method='post' action='action/saveavatar.php'>
                     Select avatar appearance:<br />
                     <select name='drbavatar' onchange='OnChange(this.form.drbavatar);'>
                     <option value='0'>Select Appearance</option>

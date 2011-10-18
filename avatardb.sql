@@ -13,6 +13,8 @@ CREATE TABLE user(
 
 /*admin::admin*/
 INSERT INTO user(userName, userEmail, userPassword) VALUES('admin', 'admin@host.com', '$1$FSL.ycce$TYNM1ZN4MY/vZPNi42Zoj0');
+INSERT INTO user(userName, userEmail, userPassword) VALUES('paavo', 'paavo@host.com', '$1$FSL.ycce$TYNM1ZN4MY/vZPNi42Zoj0');
+INSERT INTO user(userName, userEmail, userPassword) VALUES('pekka', 'pekka@host.com', '$1$FSL.ycce$TYNM1ZN4MY/vZPNi42Zoj0');
 
 
 CREATE TABLE avatar(
@@ -37,4 +39,6 @@ CREATE TABLE useravatar(
 )ENGINE = InnoDB;
 
 INSERT INTO useravatar(userId, avatarId) VALUES('1', '2');
+INSERT INTO useravatar(userId, avatarId) VALUES('2', '1');
+INSERT INTO useravatar(userId, avatarId) VALUES('3', '3');
 
