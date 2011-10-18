@@ -20,7 +20,7 @@ CREATE TABLE avatar(
     avatarfile VARCHAR(100) NOT NULL
 )ENGINE = InnoDB;
 
-INSERT INTO avatar(avatarname, avatarscale, avatarfile) VALUES('default', '0.1', 'avatar1.dae');
+INSERT INTO avatar(avatarname, avatarscale, avatarfile) VALUES('first', '0.1', 'avatar1.dae');
 INSERT INTO avatar(avatarname, avatarscale, avatarfile) VALUES('second', '0.1', 'avatar2.dae');
 INSERT INTO avatar(avatarname, avatarscale, avatarfile) VALUES('third', '0.1', 'avatar3.dae');
 
