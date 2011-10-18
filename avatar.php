@@ -567,6 +567,9 @@ function updateObject(id, newdata) {
 //sockettimerid = setInterval(updateAttr, 50);
 </script>
 <?php
+
+    $user_name = $_SESSION["userName"];    
+
     if ($_SESSION["logged_in"]==true){
         //include_once "js3.php";
         include_once "action/dbconnect.php";
@@ -591,13 +594,15 @@ function updateObject(id, newdata) {
             </div>
             <div id='right'>
                 <br />
+                <p>Logged in as: $user_name</p>
+                <br />
                 <form method='post' action='action/saveavatarchanges.php'>
                     Select avatar appearance:<br />
                     <select name='drbavatar' onchange='OnChange(this.form.drbavatar);'>
                     <option value='0'>Select Appearance</option>
         "; //onchange -> get, reload avatar?
         while ($dataArray = mysql_fetch_assoc($result)){
-            print "<option value='$dataArray[avatarid]'>$dataArray[avatarname]</option>";
+            print "<option value='$dataArray[avatarId]'>$dataArray[avatarName]</option>";
         }
         print "
                     </select><br />
@@ -611,6 +616,7 @@ function updateObject(id, newdata) {
             <form method='link' action='action/logoutscript.php'>
                 <input type='submit' value='Log out'>
             </form>
+            
             </div>
         ";
     }

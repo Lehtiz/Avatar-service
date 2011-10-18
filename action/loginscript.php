@@ -12,7 +12,7 @@ if(empty($username) || empty($password)){
     header("location:../index.php");
 }
 else{
-    $query = "SELECT username, userpassword FROM user WHERE username = '$username'";
+    $query = "SELECT userName, userPassword FROM user WHERE userName = '$username'";
     $result = mysql_query($query);
     if(!$result){
         $error=mysql_error();
@@ -22,13 +22,13 @@ else{
     }
 
     $dataArray = mysql_fetch_assoc($result);
-    $db_user_name = $dataArray[username];
-    $db_user_password = $dataArray[userpassword];
+    $db_user_name = $dataArray[userName];
+    $db_user_password = $dataArray[userPassword];
     //if (strcmp($username,$db_user_name)==0 && strcmp($password,$db_user_password)==0)
     if (strcmp($username,$db_user_name)==0 && crypt($password,$db_user_password)==$db_user_password)
     {
         $_SESSION["logged_in"]=true;
-
+        $_SESSION["userName"]=$db_user_name;
         //if ($rememberMe==1)
         //{
         //    setcookie("username",$username,time() + 60*60*24*365);

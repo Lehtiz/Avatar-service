@@ -11,11 +11,12 @@ if(empty($username) || empty($email) || empty($password)){
     header("location:../newuser.php");
 }
 else{
-    $query = "INSERT INTO user(username, useremail, userpassword) VALUES('$username', '$email', '$password')";
+    $query = "INSERT INTO user(userName, userEmail, userPassword) VALUES('$username', '$email', '$password')";
 
     $result = mysql_query($query);
     if ($result){
         $_SESSION["logged_in"]=true;
+        $_SESSION["userName"]=$username;
         header("location: ../avatar.php");
     }
     else{
