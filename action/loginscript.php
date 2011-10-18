@@ -35,7 +35,17 @@ else{
         //    setcookie("password",$password,time() + 60*60*24*365);
         //    setcookie("rememberme",$rememberMe,time() + 60*60*24*365);
         //}
-        header("location:../avatar.php");
+        $query = "SELECT avatarId FROM useravatar WHERE userId IN (SELECT userId FROM user WHERE userName = '$db_user_name')";
+        $result = mysql_query($query);
+        if(!$result){
+            $error=mysql_error();
+            print $error;
+            mysql_close($dbConnection);
+            exit;
+        }
+        $dataArray = mysql_fetch_assoc($result);
+        $_SESSION["avatarId"]=$dataArray['avatarId'];
+        header("location:../avatar.php?avatar=" . $_SESSION["avatarId"]);
     }
     else
     {
