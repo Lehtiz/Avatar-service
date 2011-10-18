@@ -3,30 +3,38 @@ CREATE DATABASE avatar;
 USE avatar;
 
 CREATE TABLE user(
-    userid INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    username VARCHAR(30) NOT NULL,
-    useremail VARCHAR(50) NOT NULL,
-    userpassword VARCHAR(256) NOT NULL
+    userId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    userName VARCHAR(30) NOT NULL ,
+    userEmail VARCHAR(50) NOT NULL,
+    userPassword VARCHAR(256) NOT NULL,
+    UNIQUE (userName),
+    UNIQUE (userEmail)
 )ENGINE = InnoDB;
 
 /*admin::admin*/
-INSERT INTO user(username, useremail, userpassword) VALUES('admin', 'admin@host.com', '$1$FSL.ycce$TYNM1ZN4MY/vZPNi42Zoj0');
+INSERT INTO user(userName, userEmail, userPassword) VALUES('admin', 'admin@host.com', '$1$FSL.ycce$TYNM1ZN4MY/vZPNi42Zoj0');
 
 
 CREATE TABLE avatar(
-    avatarid INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    avatarname VARCHAR(30) NOT NULL,
-    avatarscale DECIMAL(10,3) NOT NULL,
-    avatarfile VARCHAR(100) NOT NULL
+    avatarId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    avatarName VARCHAR(30) NOT NULL,
+    avatarScale DECIMAL(10,3) NOT NULL,
+    avatarFile VARCHAR(100) NOT NULL,
+    UNIQUE (avatarName),
+    UNIQUE (avatarFile)
 )ENGINE = InnoDB;
 
-INSERT INTO avatar(avatarname, avatarscale, avatarfile) VALUES('first', '0.1', 'avatar1.dae');
-INSERT INTO avatar(avatarname, avatarscale, avatarfile) VALUES('second', '0.1', 'avatar2.dae');
-INSERT INTO avatar(avatarname, avatarscale, avatarfile) VALUES('third', '0.1', 'avatar3.dae');
+INSERT INTO avatar(avatarName, avatarScale, avatarFile) VALUES('first', '0.1', 'avatar1.dae');
+INSERT INTO avatar(avatarName, avatarScale, avatarFile) VALUES('second', '0.1', 'avatar2.dae');
+INSERT INTO avatar(avatarName, avatarScale, avatarFile) VALUES('third', '0.1', 'avatar3.dae');
 
-/*
+
 CREATE TABLE useravatar(
-    userid,
-    avatarid
+    userId INT NOT NULL,
+    avatarId INT NOT NULL,
+    FOREIGN KEY (userId) REFERENCES user(userId),
+    FOREIGN KEY (avatarId) REFERENCES avatar(avatarId)
 )ENGINE = InnoDB;
-*/
+
+INSERT INTO useravatar(userId, avatarId) VALUES('1', '2');
+
