@@ -568,7 +568,7 @@ function updateObject(id, newdata) {
 </script>
 <?php
 
-    $user_name = $_SESSION["userName"];    
+    $user_name = $_SESSION["userName"]; 
 
     if ($_SESSION["logged_in"]==true){
         //include_once "js3.php";
