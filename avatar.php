@@ -583,7 +583,6 @@ function updateObject(id, newdata) {
 </script>
 <?php
 
-    $user_name = $_SESSION["userName"];
     $_SESSION["selectedAvatarId"] = $_GET['avatar'];
 
     if ($_SESSION["logged_in"]==true){
@@ -609,10 +608,9 @@ function updateObject(id, newdata) {
             </div>
             <div id='right'>
                 <br />
-                <p>Logged in as: $user_name</p>
                 <br />
                 <form method='post' action='action/saveavatar.php'>
-                    Select avatar appearance:<br />
+                    Select avatar appearance:<br /><br />
                     <select name='drbavatar' onchange='OnChange(this.form.drbavatar);'>
                     <option value='0'>Select Appearance</option>
         "; //onchange -> get, reload avatar?
@@ -624,8 +622,6 @@ function updateObject(id, newdata) {
                     <br />
                     <input type='submit' value='Save changes' />
                 </form>
-            
-            <a href='action/logoutscript.php'>Log out</a>
             
             </div>
         ";

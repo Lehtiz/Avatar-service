@@ -3,8 +3,8 @@
 <br />
 <?php
 if($_SESSION["logged_in"]==true){
-    print "<p>You are already logged in.<br />
-    You must <a href='action/logoutscript.php'>log out</a> before you can create a new account</p>";
+    $avatarId = $_SESSION['selectedAvatarId'];
+    header("location:avatar.php?avatar=" . $avatarId);
 }
 else {
 echo "

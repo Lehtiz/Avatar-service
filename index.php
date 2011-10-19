@@ -4,7 +4,7 @@
 <?php
 if($_SESSION["logged_in"]==true){
     $avatarId = $_SESSION['selectedAvatarId'];
-    print "<p>You are already logged in.<br /> You can either <a href='action/logoutscript.php'>log out</a> or continue modifying your <a href='avatar.php?avatar=$avatarId'>Avatar</a></p>";
+    header("location:avatar.php?avatar=" . $avatarId);
 }
 else {
 echo "

@@ -12,3 +12,12 @@
     
     <body onLoad="document.getElementById('1').focus()">
         <div id='center'>
+            <div id='topright'>
+                <?php
+                if($_SESSION["logged_in"]==true){
+                    $user_name = $_SESSION["userName"];
+                    print "<p>Welcome, $user_name</p>";
+                    print "<a href='action/logoutscript.php'>Log out</a>";
+                }
+                ?>
+            </div>
