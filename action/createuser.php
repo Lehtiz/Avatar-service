@@ -17,6 +17,16 @@ else{
     if ($result){
         $_SESSION["logged_in"]=true;
         $_SESSION["userName"]=$username;
+        
+        $query = "SELECT userId FROM user WHERE userName = '$username'";
+        $result = mysql_query($query);
+        if(!$result){
+            print mysql_error();
+            mysql_close($dbConnection);
+            exit;
+        }
+        $dataArray = mysql_fetch_assoc($result);
+        $_SESSION['userId'] = $dataArray['userId'];
         header("location: ../avatar.php");
     }
     else{
