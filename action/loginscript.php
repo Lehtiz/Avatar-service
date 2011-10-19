@@ -45,6 +45,18 @@ else{
         }
         $dataArray = mysql_fetch_assoc($result);
         $_SESSION["avatarId"]=$dataArray['avatarId'];
+
+        $query = "SELECT userId FROM user WHERE userName = '$db_user_name'";
+        $result = mysql_query($query);
+        if(!$result){
+            $error=mysql_error();
+            print $error;
+            mysql_close($dbConnection);
+            exit;
+        }
+        $dataArray = mysql_fetch_assoc($result);
+        $_SESSION["userId"]=$dataArray['userId'];
+
         header("location:../avatar.php?avatar=" . $_SESSION["avatarId"]);
     }
     else
