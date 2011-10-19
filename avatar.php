@@ -71,6 +71,23 @@ function OnChange(dropdown){
 
 
 
+<?php
+//get avatar model filename
+include_once "action/dbconnect.php";
+$avatarid = $_GET['avatar'];
+$modelsDir = 'models/';
+$query = 'SELECT avatarFile FROM avatar WHERE avatarId=' . $avatarid;
+$result = mysql_query($query);
+if(!$result){
+    print mysql_error();
+    mysql_close($dbConnection);
+    exit;
+}
+$dataArray = mysql_fetch_assoc($result);
+$file = $dataArray['avatarFile'];
+$avatar = $modelsDir . $file;
+include_once "action/dbdisconnect.php";
+?>
 
 <script type='text/javascript'>
 
@@ -253,7 +270,7 @@ function Entity(id) {
 }
 
 //##############
-/*
+/* test rewrite
 
 ?php 
 $dataArray = asd;
@@ -273,46 +290,6 @@ function showAvatar(avatar, scale){
 	    scene.addCollada(this.mesh);  
     }
 }
-*/
-//##############
-<?php
-
-$avatarid = $_GET['avatar'];
-$modelsDir = "models/";
-$avatar = $modelsDir . "avatar" . $avatarid . ".dae";
-?>
-
-/*
-?php
-$avatarid = $_GET['avatar'];
-$modelsDir = "models/";
-$query = "SELECT avatarfile FROM avatar WHERE avatarid=$avatarid";
-    $result = mysql_query($query);
-    if(!$result){
-        print mysql_error();
-        mysql_close($dbConnection);
-        exit;
-    }
-    $dataArray = mysql_fetch_assoc($result);
-//$avatar = $modelsDir . "avatar" . $avatarid . ".dae";
-$avatar = $modelsDir . $dataArray['avatarfile'];
-?>
-
-*/
-//3
-/*
-?php
-$userid = $_SESSION['userId'];
-$query = "SELECT avatarId FROM useravatar WHERE userId=$userid";
-$result = mysql_query($query);
-if(!$result){
-    print mysql_error();
-    mysql_close($dbConnection);
-    exit;
-}
-$dataArray = mysql_fetch_assoc($result);
-$avatarid = $dataArray['avatarId']; 
-?>
 */
 //##############
 
@@ -341,7 +318,6 @@ $avatarid = $dataArray['avatarId'];
 	    this.parent = id;
 
 	    this.url = "<?php echo $avatar; ?>";
-	    //this.url = "models/avatar1.dae";
 	
 	    if (this.url) {
 	        this.mesh = new GLGE.Collada();
@@ -582,13 +558,12 @@ function updateObject(id, newdata) {
 //sockettimerid = setInterval(updateAttr, 50);
 </script>
 <?php
-
-    $_SESSION["selectedAvatarId"] = $_GET['avatar'];
-
     if ($_SESSION["logged_in"]==true){
+        $user_name = $_SESSION["userName"];
+        $_SESSION["selectedAvatarId"] = $_GET['avatar'];
+        $selected = $_GET['avatar'];
         include_once "action/dbconnect.php";
         
-        //db stuff
         $query = "SELECT * FROM avatar";
         $result = mysql_query($query);
         if(!$result){
@@ -596,7 +571,6 @@ function updateObject(id, newdata) {
             mysql_close($dbConnection);
             exit;
         }
-        //
     
         print "
             <h3>Edit Identity & Avatar</h3>
@@ -613,20 +587,25 @@ function updateObject(id, newdata) {
                     Select avatar appearance:<br /><br />
                     <select name='drbavatar' onchange='OnChange(this.form.drbavatar);'>
                     <option value='0'>Select Appearance</option>
-        "; //onchange -> get, reload avatar?
+        ";
         while ($dataArray = mysql_fetch_assoc($result)){
-            print "<option value='$dataArray[avatarId]'>$dataArray[avatarName]</option>";
+            if($dataArray['avatarId'] == $selected){
+                print "<option value='$dataArray[avatarId]' selected='selected'>$dataArray[avatarName]</option>";
+            }
+            else{
+                print "<option value='$dataArray[avatarId]'>$dataArray[avatarName]</option>";
+            }
         }
         print "
                     </select><br />
                     <br />
                     <input type='submit' value='Save changes' />
                 </form>
-            
             </div>
         ";
     }
-    else
+    else{
         print "<p>You must <a href='index.php'>log in</a> to enter this page</p>";
+    }
 ?>
 <?php include_once "bottom.php"; ?>
