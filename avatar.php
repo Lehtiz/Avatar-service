@@ -72,6 +72,7 @@ function OnChange(dropdown){
 
 
 <?php
+    if ($_SESSION["logged_in"]==true){
 //get avatar model filename
 include_once "action/dbconnect.php";
 $avatarid = $_GET['avatar'];
@@ -87,6 +88,7 @@ $dataArray = mysql_fetch_assoc($result);
 $file = $dataArray['avatarFile'];
 $avatar = $modelsDir . $file;
 include_once "action/dbdisconnect.php";
+}
 ?>
 
 <script type='text/javascript'>
