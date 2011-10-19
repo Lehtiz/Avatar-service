@@ -270,7 +270,7 @@ function Entity(id) {
 }
 
 //##############
-/*
+/* test rewrite
 
 ?php 
 $dataArray = asd;
@@ -558,15 +558,12 @@ function updateObject(id, newdata) {
 //sockettimerid = setInterval(updateAttr, 50);
 </script>
 <?php
-
-    $user_name = $_SESSION["userName"];
-    $_SESSION["selectedAvatarId"] = $_GET['avatar'];
-    $selected = $_GET['avatar'];
-
     if ($_SESSION["logged_in"]==true){
+        $user_name = $_SESSION["userName"];
+        $_SESSION["selectedAvatarId"] = $_GET['avatar'];
+        $selected = $_GET['avatar'];
         include_once "action/dbconnect.php";
         
-        //db stuff
         $query = "SELECT * FROM avatar";
         $result = mysql_query($query);
         if(!$result){
@@ -574,7 +571,6 @@ function updateObject(id, newdata) {
             mysql_close($dbConnection);
             exit;
         }
-        //
     
         print "
             <h3>Edit Identity & Avatar</h3>
@@ -592,7 +588,7 @@ function updateObject(id, newdata) {
                     Select avatar appearance:<br />
                     <select name='drbavatar' onchange='OnChange(this.form.drbavatar);'>
                     <option value='0'>Select Appearance</option>
-        "; //onchange -> get, reload avatar?
+        ";
         while ($dataArray = mysql_fetch_assoc($result)){
             if($dataArray['avatarId'] == $selected){
                 print "<option value='$dataArray[avatarId]' selected='selected'>$dataArray[avatarName]</option>";
@@ -606,13 +602,12 @@ function updateObject(id, newdata) {
                     <br />
                     <input type='submit' value='Save changes' />
                 </form>
-            
             <a href='action/logoutscript.php'>Log out</a>
-            
             </div>
         ";
     }
-    else
+    else{
         print "<p>You must <a href='index.php'>log in</a> to enter this page</p>";
+    }
 ?>
 <?php include_once "bottom.php"; ?>

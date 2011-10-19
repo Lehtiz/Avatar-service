@@ -5,7 +5,6 @@ if($_SESSION["logged_in"]==false){
 }
 include_once "dbconnect.php";
 
-//sec, inject, strip tags
 $userid = $_SESSION["userId"];
 $username = $_SESSION["userName"];
 $avatarid = $_SESSION["selectedAvatarId"];
@@ -21,8 +20,8 @@ if(!$hasrecord){
     exit;
 }
 $dataArray = mysql_fetch_assoc($hasrecord);
-//print $dataArray['COUNT(*)'];
 
+//check if record exists, update or insert as result
 if($dataArray['COUNT(*)'] == 0){
     $query = "INSERT INTO useravatar(userId, avatarId) VALUES($userid, $avatarid)";
 }
@@ -39,8 +38,5 @@ if(!$result){
 else{
     header("location: ../avatar.php?avatar=$avatarid");
 }
-//header("location: avatar.php");
-
-//js onclick, popupalert
 
 ?>
