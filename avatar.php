@@ -561,6 +561,7 @@ function updateObject(id, newdata) {
 
     $user_name = $_SESSION["userName"];
     $_SESSION["selectedAvatarId"] = $_GET['avatar'];
+    $selected = $_GET['avatar'];
 
     if ($_SESSION["logged_in"]==true){
         include_once "action/dbconnect.php";
@@ -593,7 +594,12 @@ function updateObject(id, newdata) {
                     <option value='0'>Select Appearance</option>
         "; //onchange -> get, reload avatar?
         while ($dataArray = mysql_fetch_assoc($result)){
-            print "<option value='$dataArray[avatarId]'>$dataArray[avatarName]</option>";
+            if($dataArray['avatarId'] == $selected){
+                print "<option value='$dataArray[avatarId]' selected='selected'>$dataArray[avatarName]</option>";
+            }
+            else{
+                print "<option value='$dataArray[avatarId]' >$dataArray[avatarName]</option>";
+            }
         }
         print "
                     </select><br />
