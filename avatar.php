@@ -286,7 +286,7 @@ $avatar = $modelsDir . "avatar" . $avatarid . ".dae";
 ?php
 $avatarid = $_GET['avatar'];
 $modelsDir = "models/";
-$query = "SELECT avatarfile FROM avatar WHERE avatarid=" . $avatarid;
+$query = "SELECT avatarfile FROM avatar WHERE avatarid=$avatarid";
     $result = mysql_query($query);
     if(!$result){
         print mysql_error();
@@ -298,6 +298,21 @@ $query = "SELECT avatarfile FROM avatar WHERE avatarid=" . $avatarid;
 $avatar = $modelsDir . $dataArray['avatarfile'];
 ?>
 
+*/
+//3
+/*
+?php
+$userid = $_SESSION['userId'];
+$query = "SELECT avatarId FROM useravatar WHERE userId=$userid";
+$result = mysql_query($query);
+if(!$result){
+    print mysql_error();
+    mysql_close($dbConnection);
+    exit;
+}
+$dataArray = mysql_fetch_assoc($result);
+$avatarid = $dataArray['avatarId']; 
+?>
 */
 //##############
 
@@ -572,7 +587,6 @@ function updateObject(id, newdata) {
     $_SESSION["selectedAvatarId"] = $_GET['avatar'];
 
     if ($_SESSION["logged_in"]==true){
-        //include_once "js3.php";
         include_once "action/dbconnect.php";
         
         //db stuff
