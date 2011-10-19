@@ -71,6 +71,23 @@ function OnChange(dropdown){
 
 
 
+<?php
+//get avatar model filename
+include_once "action/dbconnect.php";
+$avatarid = $_GET['avatar'];
+$modelsDir = 'models/';
+$query = 'SELECT avatarFile FROM avatar WHERE avatarId=' . $avatarid;
+$result = mysql_query($query);
+if(!$result){
+    print mysql_error();
+    mysql_close($dbConnection);
+    exit;
+}
+$dataArray = mysql_fetch_assoc($result);
+$file = $dataArray['avatarFile'];
+$avatar = $modelsDir . $file;
+include_once "action/dbdisconnect.php";
+?>
 
 <script type='text/javascript'>
 
@@ -275,46 +292,6 @@ function showAvatar(avatar, scale){
 }
 */
 //##############
-<?php
-
-$avatarid = $_GET['avatar'];
-$modelsDir = "models/";
-$avatar = $modelsDir . "avatar" . $avatarid . ".dae";
-?>
-
-/*
-?php
-$avatarid = $_GET['avatar'];
-$modelsDir = "models/";
-$query = "SELECT avatarfile FROM avatar WHERE avatarid=$avatarid";
-    $result = mysql_query($query);
-    if(!$result){
-        print mysql_error();
-        mysql_close($dbConnection);
-        exit;
-    }
-    $dataArray = mysql_fetch_assoc($result);
-//$avatar = $modelsDir . "avatar" . $avatarid . ".dae";
-$avatar = $modelsDir . $dataArray['avatarfile'];
-?>
-
-*/
-//3
-/*
-?php
-$userid = $_SESSION['userId'];
-$query = "SELECT avatarId FROM useravatar WHERE userId=$userid";
-$result = mysql_query($query);
-if(!$result){
-    print mysql_error();
-    mysql_close($dbConnection);
-    exit;
-}
-$dataArray = mysql_fetch_assoc($result);
-$avatarid = $dataArray['avatarId']; 
-?>
-*/
-//##############
 
 (function (Components, $, undefined) {
 
@@ -341,7 +318,6 @@ $avatarid = $dataArray['avatarId'];
 	    this.parent = id;
 
 	    this.url = "<?php echo $avatar; ?>";
-	    //this.url = "models/avatar1.dae";
 	
 	    if (this.url) {
 	        this.mesh = new GLGE.Collada();
