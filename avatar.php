@@ -598,7 +598,7 @@ function updateObject(id, newdata) {
                 print "<option value='$dataArray[avatarId]' selected='selected'>$dataArray[avatarName]</option>";
             }
             else{
-                print "<option value='$dataArray[avatarId]' >$dataArray[avatarName]</option>";
+                print "<option value='$dataArray[avatarId]'>$dataArray[avatarName]</option>";
             }
         }
         print "
