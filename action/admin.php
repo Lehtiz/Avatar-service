@@ -1,4 +1,8 @@
 <?php
+session_start();
+if(!$_SESSION["userId"]==1 && !$_SESSION["userName"]=="admin"){
+    header("location: index.php");
+}
 include_once "dbconnect.php";
 $selection = $_POST['mode'];
 

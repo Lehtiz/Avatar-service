@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION["logged_in"]==false){
+if(!$_SESSION["userId"]==1 && !$_SESSION["userName"]=="admin"){
     header("location: index.php");
 }
 include_once "action/dbconnect.php";
