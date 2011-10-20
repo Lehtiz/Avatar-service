@@ -2,7 +2,7 @@
 include_once "dbconnect.php";
 $selection = $_POST['mode'];
 
-if($selection == 1){ //add avatar
+if($selection == 'addavatar'){ //add avatar
     $avatarname = $_POST['avatarname'];
     $avatarscale = $_POST['avatarscale'];
 
@@ -43,8 +43,37 @@ if($selection == 1){ //add avatar
     else{
         print "Avatar successfully added.";
     }
-}//endif sel=1
-else if($selection == 2){ //user stuff
+}
+else if($selection == 'removeavatar'){
+    $avatarid = $_POST['drbavatar'];
+    if($avatarid != 0){
+        //del useravatar
+        $query1 = "DELETE FROM useravatar WHERE avatarId='$avatarid'";
+        $result1 = mysql_query($query1);
+        if(!$result1){
+            print mysql_error();
+            mysql_close($dbConnection);
+            exit;
+        }
+        //del avatar
+        $query2 = "DELETE FROM avatar WHERE avatarId='$avatarid'";
+        $result2 = mysql_query($query2);
+        if(!$result2){
+            print mysql_error();
+            mysql_close($dbConnection);
+            exit;
+        }
+        if($result1 && $result2){
+            print "operation succesfull. <a href='../adminform.php'>Back</a>";
+        }
+        //del avatar files
+    }
+    else{
+        print "no avatar selected. <a href='../adminform.php'>Back</a>";
+    }
+}
+
+else if($selection == 'user'){ //user stuff
     $action = $_POST['action'];
     $userid = $_POST['drbuser'];
     if($userid != 0){
