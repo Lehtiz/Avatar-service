@@ -79,11 +79,11 @@ $avatarid = $_GET['avatar'];
 $modelsDir = 'models/';
 $query = 'SELECT avatarFile FROM avatar WHERE avatarId=' . $avatarid;
 $result = mysql_query($query);
-if(!$result){
-    print mysql_error();
-    mysql_close($dbConnection);
-    exit;
-}
+//if(!$result){
+//    print mysql_error();
+//    mysql_close($dbConnection);
+//    exit;
+//}
 $dataArray = mysql_fetch_assoc($result);
 $file = $dataArray['avatarFile'];
 $avatar = $modelsDir . $file;
