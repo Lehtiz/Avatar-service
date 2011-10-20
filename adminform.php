@@ -48,8 +48,8 @@ print "
     <form action='action/admin.php' method='POST'>
     <fieldset><legend><h3>Moderate users:</h3></legend><table>
     <input type='hidden' name='mode' value='user' />
-    <tr><td><input type='radio' name='action' value='remove' checked /> Remove</td>
-    <td><input type='radio' name='action' value='edit' /> Edit</td></tr>
+    <tr><td><input type='radio' name='action' value='edit' checked /> Edit</td>
+    <td><input type='radio' name='action' value='remove' /> Remove</td></tr>
     <tr><td>Select user: </td><td><select name='drbuser'>
     <option value='0'>Select user</option>
 ";
