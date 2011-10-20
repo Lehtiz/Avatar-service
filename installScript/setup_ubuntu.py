@@ -216,6 +216,14 @@ def cleanUp(file):
     if os.path.isfile(file):
         os.remove(file)
 
+def avatarServiceAdminFoldersRights():
+    folder1 = AVATAR_ROOT + "action/upload/"
+    folder2 = AVATAR_ROOT + "models/"
+    webuser = "www-data"
+    subprocess.call("chown -R " + webuser + ":" + webuser + " " + folder1, shell=True)
+    subprocess.call("chown -R " + webuser + ":" + webuser + " " + folder2, shell=True)
+
+
 """
 def buildTundra():
     if not os.path.isdir(rex):
