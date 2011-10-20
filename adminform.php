@@ -9,7 +9,7 @@ print "
 <html><body>
 
     <form action='action/admin.php' enctype='multipart/form-data' method='POST'>
-    <fieldset><legend><h3>Add avatar</h3></legend><table>
+    <fieldset><legend><h3>Add avatar:</h3></legend><table>
     <input type='hidden' name='mode' value='addavatar' />
     <tr><td>Name: </td><td><input type='text' name='avatarname' /></td></tr>
     <tr><td>Scale: </td><td><input type='text' name='avatarscale' /></td></tr>
@@ -22,7 +22,7 @@ print "
 print "
 
     <form action='action/admin.php' method='POST'>
-    <fieldset><legend><h3>Remove avatar</h3></legend><table>
+    <fieldset><legend><h3>Remove avatar:</h3></legend><table>
     <input type='hidden' name='mode' value='removeavatar'>
     <tr><td><select name='drbavatar'>
     <option value='0'>Select avatar</option>
@@ -46,7 +46,7 @@ print "
 print " 
 
     <form action='action/admin.php' method='POST'>
-    <fieldset><legend><h3>User</h3></legend><table>
+    <fieldset><legend><h3>Moderate users:</h3></legend><table>
     <input type='hidden' name='mode' value='user' />
     <tr><td><input type='radio' name='action' value='remove' checked /> Remove</td>
     <td><input type='radio' name='action' value='edit' /> Edit</td></tr>

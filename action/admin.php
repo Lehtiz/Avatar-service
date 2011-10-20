@@ -6,42 +6,54 @@ if($selection == 'addavatar'){ //add avatar
     $avatarname = $_POST['avatarname'];
     $avatarscale = $_POST['avatarscale'];
 
-    $uploadDir = "upload/"; //mod for perm "www-data"
+    //$uploadDir = "upload/"; //mod for perm "www-data"
     $storageDir = "../models/"; //write perm for apache
 
-    //if ($_FILES["file"]["type"] == "image/gif")/* && ($_FILES["file"]["size"] < 20000))*/{
-    $tmpname = $_FILES["avatarfile"]["tmp_name"];
-    $filename = $_FILES["avatarfile"]["name"];
+    $allowedExtensions = array("dae");
 
-    if ($_FILES["avatarfile"]["error"] > 0){
-        echo "Return Code: " . $_FILES["avatarfile"]["error"] . "<br />";
+    function isAllowedExtension($fileName) {
+        global $allowedExtensions;
+
+        return in_array(end(explode(".", $fileName)), $allowedExtensions);
     }
-    else{
-        echo "Upload: " . $filename . "<br />";
-        echo "Type: " . $_FILES["avatarfile"]["type"] . "<br />";
-        echo "Size: " . ($_FILES["avatarfile"]["size"] / 1024) . " Kb<br />";
-        echo "Temp file: " . $tmpname . "<br />";
 
-        if (file_exists($storageDir . $filename)){
-            echo $filename . " already exists. ";
+    if (isAllowedExtension($_FILES["avatarfile"]["name"]))/* && ($_FILES["avatarfile"]["size"] < 20000))*/{
+        $tmpname = $_FILES["avatarfile"]["tmp_name"];
+        $filename = $_FILES["avatarfile"]["name"];
+
+        if ($_FILES["avatarfile"]["error"] > 0){
+            echo "Return Code: " . $_FILES["avatarfile"]["error"] . "<br />";
         }
         else{
-            move_uploaded_file($tmpname, $storageDir . $filename);
-            echo "Stored in: " . $storageDir . $filename;
+            echo "Upload: " . $filename . "<br />";
+            echo "Type: " . $_FILES["avatarfile"]["type"] . "<br />";
+            echo "Size: " . ($_FILES["avatarfile"]["size"] / 1024) . " Kb<br />";
+            echo "Temp file: " . $tmpname . "<br />";
+
+            if (file_exists($storageDir . $filename)){
+                echo $filename . " already exists. <br /><br /><a href='../adminform.php'>Back</a>";
+            }
+            else{
+                move_uploaded_file($tmpname, $storageDir . $filename);
+                echo "Stored in: " . $storageDir . $filename;
+
+                $query = "INSERT INTO avatar(avatarName, avatarScale, avatarFile) VALUES('$avatarname', '$avatarscale', '$filename')";
+                $result = mysql_query($query);
+                if(!$result){
+                    print mysql_error();
+                    mysql_close($dbConnection);
+                    exit;
+                }
+                else{
+                    print "<br />Avatar successfully added.";
+                    print "<br /><a href='../adminform.php'>Back</a>";
+                }
+            }
         }
-    }
-    //}else{echo "Invalid file";}
-
-
-    $query = "INSERT INTO avatar(avatarName, avatarScale, avatarFile) VALUES('$avatarname', '$avatarscale', '$filename')";
-    $result = mysql_query($query);
-    if(!$result){
-        print mysql_error();
-        mysql_close($dbConnection);
-        exit;
-    }
-    else{
-        print "Avatar successfully added.";
+        
+    }else{
+        print "Invalid file";
+        print "<br /><a href='../adminform.php'>Back</a>";
     }
 }
 else if($selection == 'removeavatar'){
