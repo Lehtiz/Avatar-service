@@ -13,7 +13,7 @@ if($selection == 'addavatar'){ //add avatar
     //$uploadDir = "upload/"; //mod for perm "www-data"
     $storageDir = "../models/"; //write perm for apache
 
-    $allowedExtensions = array("dae");
+    $allowedExtensions = array("dae", "png");
 
     function isAllowedExtension($fileName) {
         global $allowedExtensions;
