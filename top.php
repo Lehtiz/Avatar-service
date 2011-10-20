@@ -18,6 +18,9 @@
                     $user_name = $_SESSION["userName"];
                     print "<p>Welcome, $user_name</p>";
                     print "<a href='action/logoutscript.php'>Log out</a>";
+                    if($_SESSION["userId"]==1 && $_SESSION["userName"]=="admin"){
+                        print "&nbsp;&nbsp;<a href='adminform.php'>Moderate</a>";
+                    }
                 }
                 ?>
             </div>
