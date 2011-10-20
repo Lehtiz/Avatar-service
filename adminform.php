@@ -27,6 +27,7 @@ print "
     <tr><td><input type='submit' value='Submit' /></td></tr>
     </table></form>
     
+<h3>Moderate users</h3>
     <form action='action/admin.php' method='POST'><table>
     <input type='hidden' name='mode' value='2' />
     <tr><td><input type='radio' name='action' value='remove' checked /> Remove</td>

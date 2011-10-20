@@ -31,25 +31,30 @@ if($selection == 1){ //add avatar
             echo "Temp file: " . $tmpname . "<br />";
 
             if (file_exists($storageDir . $filename)){
-                echo $filename . " already exists. <br />";
+                echo $filename . " already exists. <br /><br /><a href='../adminform.php'>Back</a>";
             }
             else{
                 move_uploaded_file($tmpname, $storageDir . $filename);
                 echo "Stored in: " . $storageDir . $filename;
+
+                $query = "INSERT INTO avatar(avatarName, avatarScale, avatarFile) VALUES('$avatarname', '$avatarscale', '$filename')";
+                $result = mysql_query($query);
+                if(!$result){
+                    print mysql_error();
+                    mysql_close($dbConnection);
+                    exit;
+                }
+                else{
+                    print "<br />Avatar successfully added.";
+                    print "<br /><a href='../adminform.php'>Back</a>";
+                }
             }
         }
-
-        $query = "INSERT INTO avatar(avatarName, avatarScale, avatarFile) VALUES('$avatarname', '$avatarscale', '$filename')";
-        $result = mysql_query($query);
-        if(!$result){
-            print mysql_error();
-            mysql_close($dbConnection);
-            exit;
-        }
-        else{
-            print "<br />Avatar successfully added.";
-        }
-    }else{echo "Invalid file";}
+        
+    }else{
+        print "Invalid file";
+        print "<br /><a href='../adminform.php'>Back</a>";
+    }
 }//endif sel=1
 else if($selection == 2){ //removeavatar
     $action = $_POST['action'];
