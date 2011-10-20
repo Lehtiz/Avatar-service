@@ -44,7 +44,7 @@ if($selection == 1){ //add avatar
         print "Avatar successfully added.";
     }
 }//endif sel=1
-else if($selection == 2){ //removeavatar
+else if($selection == 2){ //user stuff
     $action = $_POST['action'];
     $userid = $_POST['drbuser'];
     if($userid != 0){
