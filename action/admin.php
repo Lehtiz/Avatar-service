@@ -80,7 +80,7 @@ else if($selection == 'removeavatar'){
             exit;
         }
         if($result1 && $result2){
-            print "operation succesfull. <a href='../adminform.php'>Back</a>";
+            print "operation successful. <a href='../adminform.php'>Back</a>";
         }
         //del avatar files
     }
@@ -111,7 +111,7 @@ else if($selection == 'user'){ //user stuff
                 exit;
             }
             if($result1 && $result2){
-                print "operation succesfull. <a href='../adminform.php'>Back</a>";
+                print "operation successful. <a href='../adminform.php'>Back</a>";
             }
         }
         if($action == 'edit'){
@@ -140,7 +140,7 @@ else if($selection == 'user'){ //user stuff
                 exit;
             }
             else{
-                print "operation succesfull. <a href='../adminform.php'>Back</a>";
+                print "operation successful. <a href='../adminform.php'>Back</a>";
             }
         }
     }
