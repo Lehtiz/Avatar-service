@@ -72,11 +72,6 @@ print "
     </table></fieldset></form>
 </body></html>
 ";
-/*
-
-
-
-*/
 
 print "<a href='index.php'>Back</a> <a href='action/logoutscript.php'>Log out</a>";
 ?>
