@@ -122,6 +122,9 @@ def setupAvatarService():
     #setup avatar-service database, import from a file
     dbRootImportFromFile(AVATAR_ROOT + DATABASE_FILE)
     
+    #enable writing to models folder for adding avatar models via moderation page
+    avatarServiceModelFolderRights()
+    
     #setup glge for rendering in browser
     setupGlge()
     #getJquery() #added jquery to repo
@@ -216,12 +219,12 @@ def cleanUp(file):
     if os.path.isfile(file):
         os.remove(file)
 
-def avatarServiceAdminFoldersRights():
-    folder1 = AVATAR_ROOT + "action/upload/"
-    folder2 = AVATAR_ROOT + "models/"
-    webuser = "www-data"
-    subprocess.call("chown -R " + webuser + ":" + webuser + " " + folder1, shell=True)
-    subprocess.call("chown -R " + webuser + ":" + webuser + " " + folder2, shell=True)
+def avatarServiceModelFolderRights():
+    #folder1 = AVATAR_ROOT + "models/"
+    #webuser = "www-data"
+    #subprocess.call("chown -R " + webuser + ":" + webuser + " " + folder1, shell=True)
+    os.chdir(AVATAR_ROOT)
+    subprocess.call("chmod o+w models/", shell=True)
 
 
 """
