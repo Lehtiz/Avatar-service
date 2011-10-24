@@ -407,7 +407,7 @@ function setAttr(params) {
                         collada.setRotZ(rotz);
 
                         if (id == myid) {
-                            camera.setLoc(0, 1.9, 3);
+                            camera.setLoc(x, y + 0.83, z + 3);
                             camera.setRot(0, 0, 0);
 			            }
 		            }
