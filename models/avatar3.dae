@@ -35,7 +35,7 @@
   </library_lights>
   <library_images>
     <image id="body_png_001" name="body_png_001">
-      <init_from>http://localhost/avatar/models/body3.png</init_from>
+      <init_from>body3.png</init_from>
     </image>
   </library_images>
   <library_effects>
