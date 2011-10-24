@@ -6,7 +6,6 @@ function OnChange(dropdown){
     var selectValue = dropdown.options[myindex].value
     var baseURL  = "avatar.php?avatar=" + selectValue
     top.location.href = baseURL;
-    
     return true;
 }
 </script>
