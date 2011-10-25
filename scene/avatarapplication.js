@@ -152,17 +152,102 @@ function ServerHandleUserConnected(connectionID, user) {
     if (user != null) {
         print("[Avatar Application] Created avatar for " + user.GetProperty("username"));
     }
+    /*
+    - create entity w/ rigid platform at z: avatarId(scene.nextfreeid in var) *10
+    - spawn avatar at z ^ +1
+    - remove after 
+    
+    
+    */
+    
 }
+/*
+function ServerHandleUserConnected2(connectionID, user) {
+    var avatarId = scene.NextFreeId();
+    var avatarEntityName = "Avatar" + connectionID;
+    var avatarEntity = scene.CreateEntityRaw(avatarId, ["EC_Script", "EC_Placeable", "EC_AnimationController"]);
+    avatarEntity.SetTemporary(true); // We never want to save the avatar entities to disk.
+    avatarEntity.SetName(avatarEntityName);
+    
+    if (user != null) {
+	avatarEntity.SetDescription(user.GetProperty("username"));
+    }
+
+    var script = avatarEntity.script;
+    script.type = "js";
+    script.runOnLoad = true;
+    var r = script.scriptRef;
+    r.ref = "local://simpleavatar.js";
+    script.scriptRef = r;
+
+    // Set starting position for avatar
+    var placeable = avatarEntity.placeable;
+    var transform = placeable.transform;
+    transform.pos.x = 0;
+    transform.pos.y = 0;
+    //up
+    transform.pos.z = (avatarId * 10) + 1;
+    placeable.transform = transform;
+    
+    //spawn floor
+    var floorId = scene.NextFreeId();
+    var floorEntityName = "floor" + connectionID;
+    var floorEntity = scene.CreateEntityRaw(floorId, ["EC_Placeable", "EC_Mesh", "EC_RigidBody"]);
+    floorEntity.SetTemporary(true);
+    floorEntity.SetName(floorEntityName);
+    
+    var placeable = floorEntity.placeable;
+    var transform = placeable.transform;
+    transform.pos.x = 0;
+    transform.pos.y = 0;
+    //up
+    transform.pos.z = avatarId * 10;
+    placeable.transform = transform;
+    
+    var floormesh = floorEntity.mesh;
+    var meshref = floormesh.meshref;
+    meshref.ref = "local://floor.mesh";
+    //floormesh.meshref = floormesh;
+    //var floormesh = scene.GetOrCreateComponentRaw("EC_Mesh", "fish", 2, false);
+    //var rf = floormesh.meshRef;
+    //rf.ref = "local://floor.mesh";
+    //floormesh.meshRef = rf;
+    //
+    scene.EmitEntityCreatedRaw(floorEntity);
+    scene.EmitEntityCreatedRaw(avatarEntity);
+    
+    if (user != null) {
+        print("[Avatar Application] Created avatar for " + user.GetProperty("username"));
+    }
+    
+    //- create entity w/ rigid platform at z: avatarId(scene.nextfreeid in var) *10
+    //- spawn avatar at z ^ +1
+    //- remove after 
+    
+// x,z bugs -30 - 31
+// y bugs -32, not positive (camera zoom out,250+)
+//
+    
+    
+}
+*/
 
 function ServerHandleUserDisconnected(connectionID, user) {
     var avatarEntityName = "Avatar" + connectionID;
-    var avatartEntity = scene.GetEntityByNameRaw(avatarEntityName);
-    if (avatartEntity != null) {
-        var entityID = avatartEntity.id;
+    var avatarEntity = scene.GetEntityByNameRaw(avatarEntityName);
+    if (avatarEntity != null) {
+        var entityID = avatarEntity.id;
         scene.RemoveEntityRaw(entityID);
-
+        
         if (user != null) {
         print("[Avatar Application] User " + user.GetProperty("username") + " disconnected, destroyed avatar entity.");
         }
-    }
+    }/*
+    var floorEntityName = "floor" + connectionID;
+    var floorEntity = scene.GetEntityByNameRaw(floorEntityName);
+    if (avatarEntity != null) {
+        //floor
+        var floorID = floorEntity.id;
+        scene.RemoveEntityRaw(floorID);
+    }*/
 }
