@@ -10,38 +10,42 @@ if($selection == 'addavatar'){ //add avatar
     $avatarname = $_POST['avatarname'];
     $avatarscale = $_POST['avatarscale'];
 
+    $filename_model = $_FILES["avatarfile"]["name"][0];
+    $filename_texture = $_FILES["avatarfile"]["name"][1];
+
     //$uploadDir = "upload/"; //mod for perm "www-data"
     $storageDir = "../models/"; //write perm for apache
 
-    $allowedExtensions = array("dae", "png");
+    $allowedExtensions_model = array("dae");
+    $allowedExtensions_texture = array("png");
 
-    function isAllowedExtension($fileName) {
-        global $allowedExtensions;
+    function isAllowedExtension($fileName, $mode) {
+        global $allowedExtensions_model;
+        global $allowedExtensions_texture;
 
-        return in_array(end(explode(".", $fileName)), $allowedExtensions);
+        if ($mode == 1){
+            return in_array(end(explode(".", $fileName)), $allowedExtensions_model);
+        }
+        else if ($mode == 2){
+            return in_array(end(explode(".", $fileName)), $allowedExtensions_texture);
+        }
     }
 
-    if (isAllowedExtension($_FILES["avatarfile"]["name"]))/* && ($_FILES["avatarfile"]["size"] < 20000))*/{
-        $tmpname = $_FILES["avatarfile"]["tmp_name"];
-        $filename = $_FILES["avatarfile"]["name"];
+    if (isAllowedExtension($filename_model, 1)){
+        $tmpname = $_FILES["avatarfile"]["tmp_name"][0];
 
-        if ($_FILES["avatarfile"]["error"] > 0){
-            echo "Return Code: " . $_FILES["avatarfile"]["error"] . "<br />";
+        if ($_FILES["avatarfile"]["error"][0] > 0){
+            echo "Return Code: " . $_FILES["avatarfile"]["error"][0] . "<br />";
         }
         else{
-            echo "Upload: " . $filename . "<br />";
-            echo "Type: " . $_FILES["avatarfile"]["type"] . "<br />";
-            echo "Size: " . ($_FILES["avatarfile"]["size"] / 1024) . " Kb<br />";
-            echo "Temp file: " . $tmpname . "<br />";
-
-            if (file_exists($storageDir . $filename)){
-                echo $filename . " already exists. <br /><br /><a href='../adminform.php'>Back</a>";
+            if (file_exists($storageDir . $filename_model)){
+                echo $filename_model . " already exists. <br /><br /><a href='../adminform.php'>Back</a>";
             }
             else{
-                move_uploaded_file($tmpname, $storageDir . $filename);
-                echo "Stored in: " . $storageDir . $filename;
+                move_uploaded_file($tmpname, $storageDir . $filename_model);
+                echo "Stored in: " . $storageDir . $filename_model;
 
-                $query = "INSERT INTO avatar(avatarName, avatarScale, avatarFile) VALUES('$avatarname', '$avatarscale', '$filename')";
+                $query = "INSERT INTO avatar(avatarName, avatarScale, avatarFile) VALUES('$avatarname', '$avatarscale', '$filename_model')";
                 $result = mysql_query($query);
                 if(!$result){
                     print mysql_error();
@@ -49,16 +53,37 @@ if($selection == 'addavatar'){ //add avatar
                     exit;
                 }
                 else{
-                    print "<br />Avatar successfully added.";
-                    print "<br /><a href='../adminform.php'>Back</a>";
+                    print "<br />Avatar model successfully added.";
                 }
             }
         }
-        
-    }else{
-        print "Invalid file";
-        print "<br /><a href='../adminform.php'>Back</a>";
     }
+    else{
+        print "Invalid model file";
+    }
+
+    if (isAllowedExtension($filename_texture, 2)){
+        $tmpname = $_FILES["avatarfile"]["tmp_name"][1];
+
+        if ($_FILES["avatarfile"]["error"][1] > 0){
+            echo "Return Code: " . $_FILES["avatarfile"]["error"][1] . "<br />";
+        }
+        else{
+            if (file_exists($storageDir . $filename_texture)){
+                echo $filename_texture . " already exists. <br /><br /><a href='../adminform.php'>Back</a>";
+            }
+            else{
+                move_uploaded_file($tmpname, $storageDir . $filename_texture);
+                echo "<br />Stored in: " . $storageDir . $filename_texture;
+
+                    print "<br />Avatar texture successfully added.";
+            }
+        }
+    }
+    else{
+        print "Invalid texture file";
+    }
+    print "<br /><a href='../adminform.php'>Back</a>";
 }
 else if($selection == 'removeavatar'){
     $avatarid = $_POST['drbavatar'];
