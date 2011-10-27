@@ -13,6 +13,11 @@ if($selection == 'addavatar'){ //add avatar
     $filename_model = $_FILES["avatarfile"]["name"][0];
     $filename_texture = $_FILES["avatarfile"]["name"][1];
 
+    $filesize_model = $_FILES["avatarfile"]["size"][0];
+    $filesize_texture = $_FILES["avatarfile"]["size"][1];
+
+    $filesize_limit = 2000000;  //max file size 2mb
+
     //$uploadDir = "upload/"; //mod for perm "www-data"
     $storageDir = "../models/"; //write perm for apache
 
@@ -31,7 +36,7 @@ if($selection == 'addavatar'){ //add avatar
         }
     }
 
-    if (isAllowedExtension($filename_model, 1)){
+    if (isAllowedExtension($filename_model, 1) && $filesize_model <= $filesize_limit){
         $tmpname = $_FILES["avatarfile"]["tmp_name"][0];
 
         if ($_FILES["avatarfile"]["error"][0] > 0){
@@ -39,7 +44,7 @@ if($selection == 'addavatar'){ //add avatar
         }
         else{
             if (file_exists($storageDir . $filename_model)){
-                echo $filename_model . " already exists. <br /><br /><a href='../adminform.php'>Back</a>";
+                echo $filename_model . " already exists";
             }
             else{
                 move_uploaded_file($tmpname, $storageDir . $filename_model);
@@ -53,16 +58,19 @@ if($selection == 'addavatar'){ //add avatar
                     exit;
                 }
                 else{
-                    print "<br />Avatar model successfully added.";
+                    print "<br />Avatar model successfully added";
                 }
             }
         }
     }
+    else if (isAllowedExtension($filename_model, 1) && $filesize_model > $filesize_limit){
+        print "Model file is too big to upload<br />";
+    }
     else{
-        print "Invalid model file";
+        print "Invalid model file<br />";
     }
 
-    if (isAllowedExtension($filename_texture, 2)){
+    if (isAllowedExtension($filename_texture, 2) && $filesize_texture <= $filesize_limit){
         $tmpname = $_FILES["avatarfile"]["tmp_name"][1];
 
         if ($_FILES["avatarfile"]["error"][1] > 0){
@@ -70,15 +78,18 @@ if($selection == 'addavatar'){ //add avatar
         }
         else{
             if (file_exists($storageDir . $filename_texture)){
-                echo $filename_texture . " already exists. <br /><br /><a href='../adminform.php'>Back</a>";
+                echo $filename_texture . " already exists";
             }
             else{
                 move_uploaded_file($tmpname, $storageDir . $filename_texture);
                 echo "<br />Stored in: " . $storageDir . $filename_texture;
 
-                    print "<br />Avatar texture successfully added.";
+                    print "<br />Avatar texture successfully added";
             }
         }
+    }
+    else if (isAllowedExtension($filename_texture, 2) && $filesize_texture > $filesize_limit){
+        print "Texture file is too big to upload";
     }
     else{
         print "<br />Invalid texture file";
