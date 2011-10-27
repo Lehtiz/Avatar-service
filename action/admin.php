@@ -81,14 +81,14 @@ if($selection == 'addavatar'){ //add avatar
         }
     }
     else{
-        print "Invalid texture file";
+        print "<br />Invalid texture file";
     }
     print "<br /><a href='../adminform.php'>Back</a>";
 }
 else if($selection == 'removeavatar'){
     $avatarid = $_POST['drbavatar'];
     if($avatarid != 0){
-        //del useravatar
+        //del useravatar links
         $query1 = "DELETE FROM useravatar WHERE avatarId='$avatarid'";
         $result1 = mysql_query($query1);
         if(!$result1){
@@ -96,7 +96,21 @@ else if($selection == 'removeavatar'){
             mysql_close($dbConnection);
             exit;
         }
-        //del avatar
+        //del avatar files
+        $query3 = "SELECT * FROM avatar WHERE avatarId='$avatarid'";
+        $result3 = mysql_query($query3);
+        if(!$result3){
+            print mysql_error();
+            mysql_close($dbConnection);
+            exit;
+        }
+        $avatarfile = mysql_fetch_assoc($result3);
+        $folder = "../models/";
+        print $folder . $avatarfile['avatarFile'];
+        unlink($folder . $avatarfile['avatarFile']);
+        //check if texture with the same name exists
+        //check for (avatarfile - suffix), delete this .png
+        //del avatar from db
         $query2 = "DELETE FROM avatar WHERE avatarId='$avatarid'";
         $result2 = mysql_query($query2);
         if(!$result2){
@@ -105,15 +119,13 @@ else if($selection == 'removeavatar'){
             exit;
         }
         if($result1 && $result2){
-            print "operation successful. <a href='../adminform.php'>Back</a>";
-        }
-        //del avatar files
+            print "<br />operation successful. <a href='../adminform.php'>Back</a>";
+        }   
     }
     else{
-        print "no avatar selected. <a href='../adminform.php'>Back</a>";
+        print "<br />no avatar selected. <a href='../adminform.php'>Back</a>";
     }
 }
-
 else if($selection == 'user'){ //user stuff
     $action = $_POST['action'];
     $userid = $_POST['drbuser'];
@@ -136,7 +148,7 @@ else if($selection == 'user'){ //user stuff
                 exit;
             }
             if($result1 && $result2){
-                print "operation successful. <a href='../adminform.php'>Back</a>";
+                print "<br />operation successful. <a href='../adminform.php'>Back</a>";
             }
         }
         if($action == 'edit'){
@@ -155,7 +167,7 @@ else if($selection == 'user'){ //user stuff
                 $query = "UPDATE user SET userName='$newname', userPassword='$newpass' WHERE userId='$userid'";
             }
             if(!$cbname && !$cbpass){
-                print "no fields selected <a href='../adminform.php'>Back</a>";
+                print "<br />no fields selected <a href='../adminform.php'>Back</a>";
             }
             
             $result = mysql_query($query);
@@ -165,7 +177,7 @@ else if($selection == 'user'){ //user stuff
                 exit;
             }
             else{
-                print "operation successful. <a href='../adminform.php'>Back</a>";
+                print "<br />operation successful. <a href='../adminform.php'>Back</a>";
             }
         }
     }
