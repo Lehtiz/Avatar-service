@@ -76,7 +76,7 @@ if ($_SESSION["logged_in"]==true){
     include_once "action/dbconnect.php";
     $avatarid = $_GET['avatar'];
     $modelsDir = 'models/';
-    $query = 'SELECT avatarFile FROM avatar WHERE avatarId=' . $avatarid;
+    $query = 'SELECT * FROM avatar WHERE avatarId=' . $avatarid;
     $result = mysql_query($query);
     /*if(!$result){
         print mysql_error();
@@ -85,7 +85,10 @@ if ($_SESSION["logged_in"]==true){
     }*/
     $dataArray = mysql_fetch_assoc($result);
     $file = $dataArray['avatarFile'];
-    $avatar = $modelsDir . $file;
+    $folder = $dataArray['avatarName'] . "/models/";
+    $avatar = $modelsDir . $folder . $file;
+    $scale = $dataArray['avatarScale'];
+    
     include_once "action/dbdisconnect.php";
 }
 ?>
@@ -324,7 +327,7 @@ function showAvatar(avatar, scale){
 	        this.mesh = new GLGE.Collada();
 	        this.mesh.setId(this.parent);
 	        this.mesh.setDocument(this.url);
-	        this.mesh.setScale(0.1);
+	        this.mesh.setScale("<?php echo $scale; ?>");
 	        scene.addCollada(this.mesh);
 	    }
     }

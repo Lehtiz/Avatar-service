@@ -18,8 +18,15 @@ if($selection == 'addavatar'){ //add avatar
 
     $filesize_limit = 5000000;  //max file size 5mb
 
-    //$uploadDir = "upload/"; //mod for perm "www-data"
-    $storageDir = "../models/"; //write perm for apache
+    $uploadDir = "../models/"; //mod for perm "www-data"
+    $storageDir = $uploadDir . $avatarname . "/";
+    $modelDir = $storageDir . "models/"; //write perm for apache
+    $imageDir = $storageDir . "images/";
+    
+    //create directory
+    mkdir($storageDir);
+    mkdir($modelDir);
+    mkdir($imageDir);
 
     $allowedExtensions_model = array("dae");
     $allowedExtensions_texture = array("png");
@@ -43,12 +50,12 @@ if($selection == 'addavatar'){ //add avatar
             echo "Return Code: " . $_FILES["avatarfile"]["error"][0] . "<br />";
         }
         else{
-            if (file_exists($storageDir . $filename_model)){
+            if (file_exists($modelDir . $filename_model)){
                 echo $filename_model . " already exists";
             }
             else{
-                move_uploaded_file($tmpname, $storageDir . $filename_model);
-                echo "Stored in: " . $storageDir . $filename_model;
+                move_uploaded_file($tmpname, $modelDir . $filename_model);
+                echo "Stored in: " . $modelDir . $filename_model;
 
                 $query = "INSERT INTO avatar(avatarName, avatarScale, avatarFile) VALUES('$avatarname', '$avatarscale', '$filename_model')";
                 $result = mysql_query($query);
@@ -77,12 +84,12 @@ if($selection == 'addavatar'){ //add avatar
             echo "Return Code: " . $_FILES["avatarfile"]["error"][1] . "<br />";
         }
         else{
-            if (file_exists($storageDir . $filename_texture)){
+            if (file_exists($imageDir . $filename_texture)){
                 echo $filename_texture . " already exists";
             }
             else{
-                move_uploaded_file($tmpname, $storageDir . $filename_texture);
-                echo "<br />Stored in: " . $storageDir . $filename_texture;
+                move_uploaded_file($tmpname, $imageDir . $filename_texture);
+                echo "<br />Stored in: " . $imageDir . $filename_texture;
 
                     print "<br />Avatar texture successfully added";
             }
@@ -116,9 +123,23 @@ else if($selection == 'removeavatar'){
             exit;
         }
         $avatarfile = mysql_fetch_assoc($result3);
-        $folder = "../models/";
-        print $folder . $avatarfile['avatarFile'];
-        unlink($folder . $avatarfile['avatarFile']);
+        #$folder = "../models/" . $avatarfile['avatarName'] . "/models/";
+        #print $folder . $avatarfile['avatarFile'];
+        #unlink($folder . $avatarfile['avatarFile']);
+        $modelfolder = "../models/" . $avatarfile['avatarName'] . "/";
+        
+        $d = $modelfolder . "models/";
+        foreach(glob($d.'*.*') as $v){
+            unlink($v);
+        }
+        $d2 = $modelfolder . "images/";
+        foreach(glob($d2.'*.*') as $v2){
+            unlink($v2);
+        }
+        rmdir($d);
+        rmdir($d2);
+        rmdir($modelfolder);        
+        
         //check if texture with the same name exists
         //check for (avatarfile - suffix), delete this .png
         //del avatar from db
