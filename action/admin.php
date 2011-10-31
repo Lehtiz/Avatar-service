@@ -16,7 +16,7 @@ if($selection == 'addavatar'){ //add avatar
     $filesize_model = $_FILES["avatarfile"]["size"][0];
     $filesize_texture = $_FILES["avatarfile"]["size"][1];
 
-    $filesize_limit = 2000000;  //max file size 2mb
+    $filesize_limit = 5000000;  //max file size 5mb
 
     //$uploadDir = "upload/"; //mod for perm "www-data"
     $storageDir = "../models/"; //write perm for apache

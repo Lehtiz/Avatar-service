@@ -11,7 +11,7 @@ function OnChange(dropdown){
 </script>
 
 <!-- GLGE -->
-<script <script type='text/javascript' src='glge/src/core/glge_math.js'></script> 
+<script type='text/javascript' src='glge/src/core/glge_math.js'></script> 
 <script type='text/javascript' src='glge/src/core/glge.js'></script> 
 <script type='text/javascript' src='glge/src/core/glge_event.js'></script> 
 <script type='text/javascript' src='glge/src/core/glge_quicknote.js'></script> 
@@ -402,9 +402,9 @@ function setAttr(params) {
                         collada.setLocX(x);
                         collada.setLocY(y);
                         collada.setLocZ(z);
-                        collada.setRotX(rotx + 3 * Math.PI / 2);
-                        collada.setRotY(roty);
-                        collada.setRotZ(rotz);
+                        collada.setRotX(rotx);
+                        collada.setRotY(rotz);
+                        collada.setRotZ(roty);
 
                         if (id == myid) {
                             camera.setLoc(x, y + 0.83, z + 3);

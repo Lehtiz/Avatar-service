@@ -2,6 +2,7 @@
 
 ## TODO: sudo passwd stuff
 ## meanwhile: RUN AS SUDO "sudo python setup.py"
+## default php file upload size is 2M, add function to mod this value (in /etc/php5/apache2/php.ini, line: "upload_max_filesize = 2M")
 ##
 
 import os
