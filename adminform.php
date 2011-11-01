@@ -13,12 +13,12 @@ print "
     <input type='hidden' name='mode' value='addavatar' />
     <tr><td>Name: </td><td><input type='text' name='avatarname' /></td></tr>
     <tr><td>Scale: </td><td><input type='text' name='avatarscale' /></td></tr>
-    <tr><td>Model: </td><td><input type='file' name='avatarfile[]' id='file' /></td></tr>
-    <tr><td>Texture: </td><td><input type='file' name='avatarfile[]' id='file' /></td></tr>
+    <tr><td>Model: </td><td><input type='file' name='modelfile' /></td></tr>
+    <tr><td>Texture(s): </td><td><input type='file' name='texturefile[]' multiple /></td></tr>
     <tr><td><input type='submit' value='Submit' /></td></tr>
     </table></fieldset></form>
 ";
-
+# multiple 
 print "
 
     <form action='action/admin.php' method='POST'>
