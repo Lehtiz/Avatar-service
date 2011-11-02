@@ -224,7 +224,7 @@ def avatarServiceModelFolderRights():
     #folder1 = AVATAR_ROOT + "models/"
     #webuser = "www-data"
     #subprocess.call("chown -R " + webuser + ":" + webuser + " " + folder1, shell=True)
-    os.chdir(AVATAR_ROOT)
+    os.chdir(AVATAR_ROOT + "scene/")
     subprocess.call("chmod 757 models/", shell=True)
 
 
