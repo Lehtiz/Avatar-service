@@ -91,11 +91,6 @@ function OnChange(dropdown){
     websocket_port = '9999';
 </script>
 
-
-
-
-
-
 <script type='text/javascript'>
 
 /*
@@ -276,30 +271,6 @@ function Entity(id) {
     }
 }
 
-//##############
-/* test rewrite
-
-?php 
-$dataArray = asd;
-$avatar = dataArray['avatarfile'];
-$scale = dataArray['avatarscale'];
-
-checkbox.onChange() - showAvatar($avatar, $scale);
-?>
-
-function showAvatar(avatar, scale){
-    this.url = avatar;
-    if(this.url){
-        this.mesh = GLGE.Collada();
-	    this.mesh.setId(this.parent);
-	    this.mesh.setDocument(this.url);
-	    this.mesh.setScale(scale);
-	    scene.addCollada(this.mesh);  
-    }
-}
-*/
-//##############
-
 (function (Components, $, undefined) {
 
     Components.EC_Placeable = function(params) {
@@ -409,12 +380,12 @@ function setAttr(params) {
                         collada.setLocY(y);
                         collada.setLocZ(z);
                         collada.setRotX(rotx);
-                        collada.setRotY(rotz);
+                        collada.setRotY(rotz - 3 * Math.PI / 2);
                         collada.setRotZ(roty);
 
                         if (id == myid) {
-                            camera.setLoc(x, y + 0.83, z + 3);
-                            camera.setRot(0, 0, 0);
+                            camera.setLoc(x + 3, y + 0.83, z);
+                            camera.setRot(0, 0 - 3 * Math.PI / 2, 0);
 			            }
 		            }
 		        }
