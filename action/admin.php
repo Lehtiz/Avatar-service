@@ -124,7 +124,7 @@ else if($selection == 'removeavatar'){
         #$folder = "../models/" . $avatarfile['avatarName'] . "/models/";
         #print $folder . $avatarfile['avatarFile'];
         #unlink($folder . $avatarfile['avatarFile']);
-        $modelfolder = "../models/" . $avatarfile['avatarName'] . "/";
+        $modelfolder = "../scene/models/" . $avatarfile['avatarName'] . "/";
         
         $d = $modelfolder . "models/";
         foreach(glob($d.'*.*') as $v){
