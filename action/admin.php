@@ -15,7 +15,7 @@ if($selection == 'addavatar'){ //add avatar
 
     $filesize_limit = 5000000;  //max file size 5mb
 
-    $uploadDir = "../models/";  //write perm for apache
+    $uploadDir = "../scene/models/";  //write perm for apache
     $storageDir = $uploadDir . $avatarname . "/";
     $modelDir = $storageDir . "models/";
     $imageDir = $storageDir . "images/";

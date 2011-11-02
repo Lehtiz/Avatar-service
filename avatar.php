@@ -1,5 +1,29 @@
 <?php include_once "top.php"; ?>
 
+<?php
+if ($_SESSION["logged_in"]==true){
+    //get avatar model filename
+    include_once "action/dbconnect.php";
+    $avatarid = $_GET['avatar'];
+    $modelsDir = 'scene/models/';
+    $query = 'SELECT * FROM avatar WHERE avatarId=' . $avatarid;
+    $result = mysql_query($query);
+    /*if(!$result){
+        print mysql_error();
+        mysql_close($dbConnection);
+        exit;
+    }*/
+    $dataArray = mysql_fetch_assoc($result);
+    $file = $dataArray['avatarFile'];
+    $folder = $dataArray['avatarName'] . "/models/";
+    $avatar = $modelsDir . $folder . $file;
+    $scale = $dataArray['avatarScale'];
+    $floormodel = $modelsDir . "floor.dae";
+    
+    include_once "action/dbdisconnect.php";
+}
+?>
+
 <script language="javascript">
 function OnChange(dropdown){
     var myindex  = dropdown.selectedIndex
@@ -62,7 +86,7 @@ function OnChange(dropdown){
 
 <!-- "Settings" --> 
 <script type='text/javascript'>
-    url_to_static = 'models/floor.dae';
+    url_to_static = '<?php echo $floormodel; ?>';
     websocket_host = 'localhost';
     websocket_port = '9999';
 </script>
@@ -70,28 +94,7 @@ function OnChange(dropdown){
 
 
 
-<?php
-if ($_SESSION["logged_in"]==true){
-    //get avatar model filename
-    include_once "action/dbconnect.php";
-    $avatarid = $_GET['avatar'];
-    $modelsDir = 'models/';
-    $query = 'SELECT * FROM avatar WHERE avatarId=' . $avatarid;
-    $result = mysql_query($query);
-    /*if(!$result){
-        print mysql_error();
-        mysql_close($dbConnection);
-        exit;
-    }*/
-    $dataArray = mysql_fetch_assoc($result);
-    $file = $dataArray['avatarFile'];
-    $folder = $dataArray['avatarName'] . "/models/";
-    $avatar = $modelsDir . $folder . $file;
-    $scale = $dataArray['avatarScale'];
-    
-    include_once "action/dbdisconnect.php";
-}
-?>
+
 
 <script type='text/javascript'>
 
@@ -343,10 +346,10 @@ function addEntity(params) {
 function removeEntity(params) {
     var id = params['id'];
     for (c = 0; c < scene.children.length; c++) {
-	if (scene.children[c].getId() == id) {
-	    scene.children.splice(c, 1);
-	    break;
-	}
+        if (scene.children[c].getId() == id) {
+            scene.children.splice(c, 1);
+            break;
+        }
     }
     delete entities[id];
 }
