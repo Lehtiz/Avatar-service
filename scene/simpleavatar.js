@@ -58,12 +58,30 @@ if (isserver) {
 function ServerInitialize() {
     var avatar = me.GetOrCreateComponentRaw("EC_Avatar");
     var rigidbody = me.GetOrCreateComponentRaw("EC_RigidBody");
+    var myplaceable = me.GetOrCreateComponentRaw("EC_Placeable");
+    var mesh = me.GetOrCreateComponentRaw("EC_Mesh");
+
+
 
     // Set the avatar appearance. This creates the mesh & animationcontroller, once the avatar asset has loaded
+    
     var r = avatar.appearanceRef;
     r.ref = "local://default_avatar.xml";
     avatar.appearanceRef = r;
-
+    /*
+    //set mesh for avatarentity
+    var r = mesh.meshRef;
+    r.ref = "local://models/mandun70/models/Mandun70.dae";
+    mesh.meshRef = r;
+    
+    //rotation for y up
+    var p = placeable.transform;
+    p.rot.x = "90";
+    placeable.transform = p;
+    
+    // 
+    */
+    
     // Set physics properties
     var sizeVec = new Vector3df();
     sizeVec.z = 2.4;

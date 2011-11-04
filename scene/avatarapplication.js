@@ -129,9 +129,8 @@ function ServerHandleUserConnected(connectionID, user) {
     avatarEntity.SetName(avatarEntityName);
     
     if (user != null) {
-	avatarEntity.SetDescription(user.GetProperty("username"));
+	    avatarEntity.SetDescription(user.GetProperty("username"));
     }
-
     var script = avatarEntity.script;
     script.type = "js";
     script.runOnLoad = true;
@@ -151,15 +150,54 @@ function ServerHandleUserConnected(connectionID, user) {
     
     if (user != null) {
         print("[Avatar Application] Created avatar for " + user.GetProperty("username"));
+    }    
+}
+function ServerHandleUserConnected3(connectionID, user) {
+    var avatarEntityName = "Avatar" + connectionID;
+    var avatarEntity = scene.CreateEntityRaw(scene.NextFreeId(), ["EC_Script", "EC_Placeable", "EC_AnimationController"]);
+    avatarEntity.SetTemporary(true); // We never want to save the avatar entities to disk.
+    avatarEntity.SetName(avatarEntityName);
+    
+    if (user != null) {
+	    avatarEntity.SetDescription(user.GetProperty("username"));
     }
-    /*
-    - create entity w/ rigid platform at z: avatarId(scene.nextfreeid in var) *10
-    - spawn avatar at z ^ +1
-    - remove after 
+    //print i am, no model
+    if(user.GetProperty("username") == "test1"){
+        print("i am test1");
+        var script = avatarEntity.script;
+        script.type = "js";
+        script.runOnLoad = true;
+        var r = script.scriptRef;
+        r.ref = "local://simpleavatar.js";
+        script.scriptRef = r;
+    }
+    else if(user.GetProperty("username") == "test2"){
+        print("i am test2");
+        var script = avatarEntity.script;
+        script.type = "js";
+        script.runOnLoad = true;
+        var r = script.scriptRef;
+        r.ref = "local://simpleavatar.js";
+        script.scriptRef = r;
+    }
+    //flymode
+    else{
+        print("i am default");
+    }
+
+    // Set random starting position for avatar
+    var placeable = avatarEntity.placeable;
+    var transform = placeable.transform;
+    transform.pos.x = (Math.random() - 0.5) * avatar_area_size + avatar_area_x;
+    transform.pos.y = (Math.random() - 0.5) * avatar_area_size + avatar_area_y;
+    transform.pos.z = avatar_area_z;
+    placeable.transform = transform;
+
+    scene.EmitEntityCreatedRaw(avatarEntity);
     
-    
-    */
-    
+    if (user != null) {
+        print("[Avatar Application] Created avatar for " + user.GetProperty("username"));
+    }    
 }
 /*
 function ServerHandleUserConnected2(connectionID, user) {
