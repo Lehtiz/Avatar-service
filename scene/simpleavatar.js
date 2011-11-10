@@ -41,7 +41,7 @@ var listenGesture = false;
 // Camera variables
 var checks_per_second = 30.0;
 var time_since_check = 0;
-var visibility_detection_enabled = true;
+var visibility_detection_enabled = false;
 var avatar_camera_default_distance = 7.0;
 var avatar_camera_distance = avatar_camera_default_distance;
 var avatar_camera_preferred_distance = avatar_camera_distance;
@@ -58,35 +58,87 @@ if (isserver) {
 function ServerInitialize() {
     var avatar = me.GetOrCreateComponentRaw("EC_Avatar");
     var rigidbody = me.GetOrCreateComponentRaw("EC_RigidBody");
-    var myplaceable = me.GetOrCreateComponentRaw("EC_Placeable");
-    var mesh = me.GetOrCreateComponentRaw("EC_Mesh");
+    var mymesh = me.GetOrCreateComponentRaw("EC_Mesh");
+    var myname = me.GetComponentRaw("EC_Name");
 
-
-
-    // Set the avatar appearance. This creates the mesh & animationcontroller, once the avatar asset has loaded
+    //get username from EC_Name component
+    var username = myname.description;
+    debug.Log("username: " + username);
     
-    var r = avatar.appearanceRef;
-    r.ref = "local://default_avatar.xml";
-    avatar.appearanceRef = r;
-    /*
-    //set mesh for avatarentity
-    var r = mesh.meshRef;
-    r.ref = "local://models/mandun70/models/Mandun70.dae";
-    mesh.meshRef = r;
     
-    //rotation for y up
-    var p = placeable.transform;
-    p.rot.x = "90";
-    placeable.transform = p;
+    if(username == "test1"){
+        var m = mymesh.meshRef;
+        m.ref = "models/mandun70/models/Mandun70.dae";
+        var rotx = 0;
+        var roty = 0;
+        var rotz = 180;
+        var scale = 1.0;
+        var posx = 0;
+        var posy = 0;
+        var posz = -0.75;
+        
+        //transformations
+        var t = mymesh.nodeTransformation;
+        //rotation
+        t.rot.x = rotx;
+        t.rot.y = roty;
+        t.rot.z = rotz;
+        //scale
+        var scaleVec = new Vector3df();
+        scaleVec.x = scale;
+        scaleVec.y = scale;
+        scaleVec.z = scale;
+        t.scale = scaleVec;
+        //position
+        t.pos.x = posx;
+        t.pos.y = posy;
+        t.pos.z = posz;
+        mymesh.nodeTransformation = t;
+        mymesh.meshRef = m;
+    }
+    else if(username == "test2"){
+        var m = mymesh.meshRef;
+        m.ref = "models/swat/models/swat.dae";
+        var rotx = 0;
+        var roty = 0;
+        var rotz = 270;
+        var scale = 0.3;
+        var posx = 0;
+        var posy = 0;
+        var posz = -0.75;
+        
+        //transformations
+        var t = mymesh.nodeTransformation;
+        //rotation
+        t.rot.x = rotx;
+        t.rot.y = roty;
+        t.rot.z = rotz;
+        //scale
+        var scaleVec = new Vector3df();
+        scaleVec.x = scale;
+        scaleVec.y = scale;
+        scaleVec.z = scale;
+        t.scale = scaleVec;
+        //position
+        t.pos.x = posx;
+        t.pos.y = posy;
+        t.pos.z = posz;
+        mymesh.nodeTransformation = t;
+        mymesh.meshRef = m;
+    }
+    else{
+        // Set the avatar appearance. This creates the mesh & animationcontroller, once the avatar asset has loaded
+        var r = avatar.appearanceRef;
+        r.ref = "local://default_avatar.xml";
+        avatar.appearanceRef = r;
+    }
     
-    // 
-    */
     
     // Set physics properties
     var sizeVec = new Vector3df();
-    sizeVec.z = 2.4;
-    sizeVec.x = 0.5;
-    sizeVec.y = 0.5;
+    sizeVec.z = 1.0;
+    sizeVec.x = 1.0;
+    sizeVec.y = 1.0;
     rigidbody.mass = avatar_mass;
     rigidbody.shapeType = 3; // Capsule
     rigidbody.size = sizeVec;

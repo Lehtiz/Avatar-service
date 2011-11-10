@@ -152,9 +152,14 @@ function ServerHandleUserConnected(connectionID, user) {
         print("[Avatar Application] Created avatar for " + user.GetProperty("username"));
     }    
 }
-function ServerHandleUserConnected3(connectionID, user) {
+/*
+function ServerHandleUserConnected4(connectionID, user) {
+    //
+    // set model according to username
+    //
+    var avatarId = scene.NextFreeId(); 
     var avatarEntityName = "Avatar" + connectionID;
-    var avatarEntity = scene.CreateEntityRaw(scene.NextFreeId(), ["EC_Script", "EC_Placeable", "EC_AnimationController"]);
+    var avatarEntity = scene.CreateEntityRaw(avatarId, ["EC_Script", "EC_Placeable", "EC_AnimationController", "EC_Mesh"]);
     avatarEntity.SetTemporary(true); // We never want to save the avatar entities to disk.
     avatarEntity.SetName(avatarEntityName);
     
@@ -164,26 +169,56 @@ function ServerHandleUserConnected3(connectionID, user) {
     //print i am, no model
     if(user.GetProperty("username") == "test1"){
         print("i am test1");
-        var script = avatarEntity.script;
-        script.type = "js";
-        script.runOnLoad = true;
-        var r = script.scriptRef;
-        r.ref = "local://simpleavatar.js";
-        script.scriptRef = r;
+        var mesh = avatarEntity.mesh;
+        var m = mesh.meshRef;
+        m.ref = "local://models/mandun70/models/Mandun70.dae";
+        mesh.meshRef = m;
     }
     else if(user.GetProperty("username") == "test2"){
         print("i am test2");
-        var script = avatarEntity.script;
-        script.type = "js";
-        script.runOnLoad = true;
-        var r = script.scriptRef;
-        r.ref = "local://simpleavatar.js";
-        script.scriptRef = r;
+        var mesh = avatarEntity.mesh;
+        var m = mesh.meshRef;
+        m.ref = "local://models/swat/models/swat.dae";
+        mesh.meshRef = m;
     }
     //flymode
     else{
         print("i am default");
+        var script = avatarEntity.script;
+        script.type = "js";
+        script.runOnLoad = true;
+        var r = script.scriptRef;
+        r.ref = "local://simpleavatar.js";
+        script.scriptRef = r;
     }
+    
+    
+    
+    
+    //var server = "http://130.231.12.86/";
+    //var loginName = "fromlogin";
+    //var modelName = "fromdb";
+    //var model = "fromdb";
+    //var modelDir = server + "scene/" + modelName + "models/" + model;
+    //
+    //if(user.GetProperty("username") == loginName){
+    //    var mesh = avatarEntity.mesh;
+    //    var m = mesh.meshRef;
+    //    m.ref = modelDir;
+    //    mesh.meshRef = m;
+    //    //change models up axis
+    //}
+    //else{
+    //    print("i am default");
+    //}
+    
+    
+    var script = avatarEntity.script;
+    script.type = "js";
+    script.runOnLoad = true;
+    var r = script.scriptRef;
+    r.ref = "local://simpleavatar.js";
+    script.scriptRef = r;
 
     // Set random starting position for avatar
     var placeable = avatarEntity.placeable;
@@ -199,6 +234,7 @@ function ServerHandleUserConnected3(connectionID, user) {
         print("[Avatar Application] Created avatar for " + user.GetProperty("username"));
     }    
 }
+*/
 /*
 function ServerHandleUserConnected2(connectionID, user) {
     var avatarId = scene.NextFreeId();
