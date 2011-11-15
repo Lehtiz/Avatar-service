@@ -239,12 +239,12 @@ def setupOgre():
 """
 
 if __name__ == "__main__":
-"""
+    """
     parser = OptionParser()
     parser.add_option("-p", "--password", dest="sudopw")
     (options, args) = parser.parse_args()
     if options.sudopw:
         sudopw = options.sudopw
         passwordSet=True
-"""
+    """
     main()
