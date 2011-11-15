@@ -29,7 +29,7 @@ CREATE TABLE avatar(
 INSERT INTO avatar(avatarName, avatarScale, avatarFile) VALUES('first', '0.1', 'avatar1.dae');
 INSERT INTO avatar(avatarName, avatarScale, avatarFile) VALUES('second', '0.1', 'avatar2.dae');
 INSERT INTO avatar(avatarName, avatarScale, avatarFile) VALUES('third', '0.1', 'avatar3.dae');
-INSERT INTO avatar(avatarName, avatarScale, avatarFile) VALUES('mandun70', '1.0', 'Mandun70.dae');
+INSERT INTO avatar(avatarName, avatarScale, avatarFile) VALUES('mandun70', '0.8', 'Mandun70.dae');
 INSERT INTO avatar(avatarName, avatarScale, avatarFile) VALUES('swat', '0.02', 'swat.dae');
 
 
