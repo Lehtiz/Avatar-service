@@ -16,11 +16,8 @@ import fileinput
 
 ###
 user = os.getenv("SUDO_USER")
-rex = "/home/" + user + "/src/realxtend/"
+rex = "/home/" + str(user) + "/src/realxtend/"
 rexBinDir = rex + "/naali/bin/"
-
-sudopw = "NOTSET"
-passwordSet=False
 
 #avatar service sources
 GIT_SOURCE = "git://github.com/Lehtiz/Avatar-service.git"
@@ -63,15 +60,6 @@ def main():
             
     else:
         print "Script needs to be run with sudo (apt-get install)"
-
-
-"""
-    if passwordSet:
-        installPrograms()
-        setupAvatarService()
-    else:
-        print("no password given")
-"""
 
 
 def installPrograms():
@@ -251,10 +239,12 @@ def setupOgre():
 """
 
 if __name__ == "__main__":
+"""
     parser = OptionParser()
     parser.add_option("-p", "--password", dest="sudopw")
     (options, args) = parser.parse_args()
     if options.sudopw:
         sudopw = options.sudopw
         passwordSet=True
+"""
     main()
