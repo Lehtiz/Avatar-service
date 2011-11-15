@@ -37,7 +37,7 @@ DB_NAME = "avatar"
 ###
 # if useRoot is set to true, mysql root account will be used for database connections
 # False creates a new user for the database, with the details below
-useRoot = False
+useRoot = False # False / True
 
 MYSQL_USER = "avatarservice"
 MYSQL_USER_PW = "avatarpw123"

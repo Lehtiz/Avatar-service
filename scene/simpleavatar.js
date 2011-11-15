@@ -69,7 +69,6 @@ function ServerInitialize() {
     var user = ;
     var modelname = ;
     var model = ;
-    selectedAvatar = ;
     var modelscale = ;
     var modelrotation = ;
     var isCustom = ;
@@ -157,7 +156,7 @@ function ServerInitialize() {
         var rotx = 0;
         var roty = 0;
         var rotz = 270;
-        var scale = 0.3;
+        var scale = 0.25;
         var posx = 0;
         var posy = 0;
         var posz = -0.75;

@@ -13,8 +13,8 @@ CREATE TABLE user(
 
 /*admin::admin*/
 INSERT INTO user(userName, userEmail, userPassword) VALUES('admin', 'admin@host.com', '$1$FSL.ycce$TYNM1ZN4MY/vZPNi42Zoj0');
-INSERT INTO user(userName, userEmail, userPassword) VALUES('paavo', 'paavo@host.com', '$1$FSL.ycce$TYNM1ZN4MY/vZPNi42Zoj0');
-INSERT INTO user(userName, userEmail, userPassword) VALUES('pekka', 'pekka@host.com', '$1$FSL.ycce$TYNM1ZN4MY/vZPNi42Zoj0');
+INSERT INTO user(userName, userEmail, userPassword) VALUES('test1', 'test1@host.com', '$1$FSL.ycce$TYNM1ZN4MY/vZPNi42Zoj0');
+INSERT INTO user(userName, userEmail, userPassword) VALUES('test2', 'test2@host.com', '$1$FSL.ycce$TYNM1ZN4MY/vZPNi42Zoj0');
 
 
 CREATE TABLE avatar(
@@ -29,6 +29,8 @@ CREATE TABLE avatar(
 INSERT INTO avatar(avatarName, avatarScale, avatarFile) VALUES('first', '0.1', 'avatar1.dae');
 INSERT INTO avatar(avatarName, avatarScale, avatarFile) VALUES('second', '0.1', 'avatar2.dae');
 INSERT INTO avatar(avatarName, avatarScale, avatarFile) VALUES('third', '0.1', 'avatar3.dae');
+INSERT INTO avatar(avatarName, avatarScale, avatarFile) VALUES('Mandun70', '1.0', 'Mandun70.dae');
+INSERT INTO avatar(avatarName, avatarScale, avatarFile) VALUES('swat', '0.02', 'swat.dae');
 
 
 CREATE TABLE useravatar(
