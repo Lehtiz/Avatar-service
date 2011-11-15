@@ -16,8 +16,9 @@ import fileinput
 
 ###
 user = os.getenv("SUDO_USER")
-rex = "/home/" + str(user) + "/src/realxtend/"
-rexBinDir = rex + "/naali/bin/"
+userhome = "/home/" + str(user)
+rex = userhome + "/src/realxtend/" # realXtend install directory
+rexBinDir = rex + "/naali/bin/" # 
 
 #avatar service sources
 GIT_SOURCE = "git://github.com/Lehtiz/Avatar-service.git"
@@ -28,7 +29,7 @@ AVATAR_ROOT = WEB_ROOT + "avatar/"
 MYSQL_HOST = "localhost"
 #mysql root details set during install
 MYSQL_ROOT = "root"
-MYSQL_ROOT_PW = "N73J"
+MYSQL_ROOT_PW = "N73J" # MYSQL root password
 
 DATABASE_FILE = "avatardb.sql"
 DB_NAME = "avatar"
@@ -63,6 +64,9 @@ def main():
 
 
 def installPrograms():
+
+    #make sure apt lists are up to date
+    subprocess.call("sudo apt-get update", shell=True)
 
     #preq for mysql installation parameters, git sources, nodejs for glge build
     subprocess.call("sudo apt-get -y install debconf-utils git nodejs", shell=True)
