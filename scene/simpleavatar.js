@@ -58,17 +58,71 @@ if (isserver) {
 function ServerInitialize() {
     var avatar = me.GetOrCreateComponentRaw("EC_Avatar");
     var rigidbody = me.GetOrCreateComponentRaw("EC_RigidBody");
-    var mymesh = me.GetOrCreateComponentRaw("EC_Mesh");
     var myname = me.GetComponentRaw("EC_Name");
 
     //get username from EC_Name component
     var username = myname.description;
     debug.Log("username: " + username);
     
+    /*
+    
+    var user = ;
+    var modelname = ;
+    var model = ;
+    selectedAvatar = ;
+    var modelscale = ;
+    var modelrotation = ;
+    var isCustom = ;
+
+    if (isCustom == true){
+        
+        var mymesh = me.GetOrCreateComponentRaw("EC_Mesh");
+        //load custom model and set appearance variables
+        var rotx = 0; // 0 for models with z up
+        var roty = 0;
+        var rotz = modelrotation; // 180 for most, to face the same way as the camera
+        var scale = modelscale;
+        var posx = 0;
+        var posy = 0;
+        var posz = -0.75; // negative height to counter "floating" models
+        
+        //load model
+        var m = mymesh.meshRef;
+        m.ref = "models/ + modelname + "/models/" + model;
+        //transformations
+        var t = mymesh.nodeTransformation;
+        //rotation
+        t.rot.x = rotx;
+        t.rot.y = roty;
+        t.rot.z = rotz;
+        //scale
+        var scaleVec = new Vector3df();
+        scaleVec.x = scale;
+        scaleVec.y = scale;
+        scaleVec.z = scale;
+        t.scale = scaleVec;
+        //position
+        t.pos.x = posx;
+        t.pos.y = posy;
+        t.pos.z = posz;
+        mymesh.nodeTransformation = t;
+        mymesh.meshRef = m;
+        
+    }
+    else{
+        //load default
+        var r = avatar.appearanceRef;
+        r.ref = "local://default_avatar.xml";
+        avatar.appearanceRef = r;
+    }
+    
+    */
+    var server = "130.231.12.86";
     
     if(username == "test1"){
+        var mymesh = me.GetOrCreateComponentRaw("EC_Mesh");
         var m = mymesh.meshRef;
-        m.ref = "models/mandun70/models/Mandun70.dae";
+        m.ref = "http://" + server + "/avatar/scene/models/mandun70/models/Mandun70.dae";
         var rotx = 0;
         var roty = 0;
         var rotz = 180;
@@ -97,8 +151,9 @@ function ServerInitialize() {
         mymesh.meshRef = m;
     }
     else if(username == "test2"){
+        var mymesh = me.GetOrCreateComponentRaw("EC_Mesh");
         var m = mymesh.meshRef;
-        m.ref = "models/swat/models/swat.dae";
+        m.ref = "http://" + server + "/avatar/scene/models/swat/models/swat.dae";
         var rotx = 0;
         var roty = 0;
         var rotz = 270;
@@ -126,10 +181,17 @@ function ServerInitialize() {
         mymesh.nodeTransformation = t;
         mymesh.meshRef = m;
     }
+    else if (username == "test3"){
+        //transforms in av2 do nothing
+        //server and client mesh can have independent mesh orientations
+        var r = avatar.appearanceRef;
+        r.ref = "av2.xml";
+        avatar.appearanceRef = r;
+    }
     else{
         // Set the avatar appearance. This creates the mesh & animationcontroller, once the avatar asset has loaded
         var r = avatar.appearanceRef;
-        r.ref = "local://default_avatar.xml";
+        r.ref = "default_avatar.xml";
         avatar.appearanceRef = r;
     }
     

@@ -234,10 +234,10 @@ def buildTundra():
         os.mkdir(rex)
     os.chdir(rex)
     subprocess.call("git clone -b tundra git://github.com/realXtend/naali.git", shell=True)
-    setupOgre()
+    enableWebSocket()
+    #setupOgre()
     os.chdir(rex + "naali/tools/")
     subprocess.call("bash build-ubuntu-deps.bash", shell=True)
-    enableWebSocket()
 
 
 def setupOgre():
