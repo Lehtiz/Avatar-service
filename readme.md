@@ -17,12 +17,12 @@ Installation using setup_ubuntu.py script
 2. Set MySQL root password
     - modify variable "MYSQL_ROOT_PW" (line 32) in setup_ubuntu.py, default password is "N73J"
 
-3.1 (Optional) Set whether you want to use a custom mysql user for the service
+3. (Optional) Set whether you want to use a custom mysql user for the service
     - modify variable "useRoot" (line 40) in setup_ubuntu.py, default value is "False"
 
-3.2 (Optional) Modify variables "MYSQL_USER" and "MYSQL_USER_PW" (lines 42 and 43) in setup_ubuntu.py
+4. (Optional) Modify variables "MYSQL_USER" and "MYSQL_USER_PW" (lines 42 and 43) in setup_ubuntu.py
 
-4. Run setup_ubuntu.py as "sudo", otherwise the script won't be executed
+5. Run setup_ubuntu.py as "sudo", otherwise the script won't be executed
 
 Manual installation
 -------------------
@@ -43,6 +43,7 @@ Manual installation
     - Copy and paste the following lines to "websocket.ini" and save it:
 
 [websocketserver.NaaliWebsocketServer]
+
 port=9999
 
 
