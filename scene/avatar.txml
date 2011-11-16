@@ -46,7 +46,7 @@
    <attribute value="100" name="Mass"/>
    <attribute value="6" name="Shape type"/>
    <attribute value="1 1 1" name="Size"/>
-   <attribute value="file://fish.mesh" name="Collision mesh ref"/>
+   <attribute value="" name="Collision mesh ref"/>
    <attribute value="0.5" name="Friction"/>
    <attribute value="0" name="Restitution"/>
    <attribute value="0" name="Linear damping"/>
@@ -83,7 +83,7 @@
    <attribute value="0" name="Mass"/>
    <attribute value="0" name="Shape type"/>
    <attribute value="39 39 0.400000006" name="Size"/>
-   <attribute value="file://floor.mesh" name="Collision mesh ref"/>
+   <attribute value="" name="Collision mesh ref"/>
    <attribute value="0.5" name="Friction"/>
    <attribute value="0" name="Restitution"/>
    <attribute value="0" name="Linear damping"/>
