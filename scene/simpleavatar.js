@@ -116,7 +116,8 @@ function ServerInitialize() {
     }
     
     */
-    var server = "130.231.12.86";
+    //var server = "130.231.12.86";
+    var server = "localhost";
     
     if(username == "test1"){
         var mymesh = me.GetOrCreateComponentRaw("EC_Mesh");
